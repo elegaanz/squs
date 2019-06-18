@@ -144,7 +144,7 @@ impl Post {
             .set_summary_string(self.subtitle.clone())?;
         article.object_props.tag = Some(json!(mentions_json));
 
-        article.object_props.set_url_string(self.ap_id.clone())?;
+        article.object_props.set_url_string(self.url.clone())?;
         article
             .object_props
             .set_to_link_vec::<Id>(to.into_iter().map(Id::new).collect())?;
