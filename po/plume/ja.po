@@ -40,43 +40,6 @@ msgstr "{0} さんがあなたの投稿をブーストしました。"
 msgid "{0}'s avatar"
 msgstr "{0} さんのアバター"
 
-# src/routes/blogs.rs:70
-msgid "To create a new blog, you need to be logged in"
-msgstr "新しいブログを作成するにはログインが必要です"
-
-# src/routes/blogs.rs:109
-msgid "A blog with the same name already exists."
-msgstr ""
-
-# src/routes/session.rs:259
-#, fuzzy
-msgid "Your blog was successfully created!"
-msgstr "パスワードが正常にリセットされました。"
-
-# src/routes/blogs.rs:167
-msgid "Your blog was deleted."
-msgstr ""
-
-# src/routes/blogs.rs:172
-msgid "You are not allowed to delete this blog."
-msgstr "このブログを削除する権限がありません。"
-
-# src/routes/blogs.rs:217
-msgid "You are not allowed to edit this blog."
-msgstr "このブログを編集する権限がありません。"
-
-# src/routes/blogs.rs:262
-msgid "You can't use this media as a blog icon."
-msgstr "このメディアはブログアイコンに使用できません。"
-
-# src/routes/blogs.rs:280
-msgid "You can't use this media as a blog banner."
-msgstr "このメディアはブログバナーに使用できません。"
-
-# src/routes/blogs.rs:312
-msgid "Your blog information have been updated."
-msgstr ""
-
 #, fuzzy
 msgid "Your comment has been posted."
 msgstr "メディアがまだありません。"
@@ -89,79 +52,17 @@ msgstr "メディアがまだありません。"
 msgid "Instance settings have been saved."
 msgstr ""
 
-# src/routes/instance.rs:182
-msgid "{} have been unblocked."
+# src/routes/instance.rs:134
+msgid "{} has been unblocked."
 msgstr ""
 
-# src/routes/instance.rs:184
-msgid "{} have been blocked."
+# src/routes/instance.rs:136
+msgid "{} has been blocked."
 msgstr ""
 
-# src/routes/instance.rs:218
-msgid "{} have been banned."
+# src/routes/instance.rs:180
+msgid "{} has been banned."
 msgstr ""
-
-# src/routes/likes.rs:51
-msgid "To like a post, you need to be logged in"
-msgstr "投稿をいいねするにはログインが必要です"
-
-# src/routes/medias.rs:143
-msgid "Your media have been deleted."
-msgstr ""
-
-# src/routes/blogs.rs:172
-#, fuzzy
-msgid "You are not allowed to delete this media."
-msgstr "このブログを削除する権限がありません。"
-
-#, fuzzy
-msgid "Your avatar has been updated."
-msgstr "メディアがまだありません。"
-
-# src/routes/blogs.rs:217
-#, fuzzy
-msgid "You are not allowed to use this media."
-msgstr "このブログを編集する権限がありません。"
-
-# src/routes/notifications.rs:29
-msgid "To see your notifications, you need to be logged in"
-msgstr "通知を表示するにはログインが必要です"
-
-# src/routes/posts.rs:93
-msgid "This post isn't published yet."
-msgstr "この投稿はまだ公開されていません。"
-
-# src/routes/posts.rs:122
-msgid "To write a new post, you need to be logged in"
-msgstr "新しい投稿を書くにはログインが必要です"
-
-# src/routes/posts.rs:140
-msgid "You are not an author of this blog."
-msgstr "あなたはこのブログの投稿者ではありません。"
-
-# src/routes/posts.rs:147
-msgid "New post"
-msgstr "新しい投稿"
-
-# src/routes/posts.rs:192
-msgid "Edit {0}"
-msgstr "{0} を編集"
-
-# src/routes/blogs.rs:217
-#, fuzzy
-msgid "You are not allowed to publish on this blog."
-msgstr "このブログを編集する権限がありません。"
-
-#, fuzzy
-msgid "Your article has been updated."
-msgstr "メディアがまだありません。"
-
-#, fuzzy
-msgid "Your article has been saved."
-msgstr "メディアがまだありません。"
-
-msgid "New article"
-msgstr "新しい投稿"
 
 # src/routes/blogs.rs:172
 #, fuzzy
@@ -172,21 +73,11 @@ msgstr "このブログを削除する権限がありません。"
 msgid "Your article has been deleted."
 msgstr "メディアがまだありません。"
 
-# src/routes/posts.rs:593
+# src/routes/posts.rs:102
 msgid ""
 "It looks like the article you tried to delete doesn't exist. Maybe it is "
 "already gone?"
 msgstr ""
-
-# src/routes/posts.rs:630
-msgid ""
-"Couldn't obtain enough information about your account. Please make sure your "
-"username is correct."
-msgstr ""
-
-# src/routes/reshares.rs:51
-msgid "To reshare a post, you need to be logged in"
-msgstr "投稿を再共有するにはログインが必要です"
 
 #, fuzzy
 msgid "You are now connected."
@@ -208,31 +99,6 @@ msgstr "こちらのリンクから、パスワードをリセットできます
 msgid "Your password was successfully reset."
 msgstr "パスワードが正常にリセットされました。"
 
-# src/routes/session.rs:263
-msgid "Sorry, but the link expired. Try again"
-msgstr ""
-"申し訳ありませんが、リンクの有効期限が切れています。もう一度お試しください"
-
-# src/routes/user.rs:136
-msgid "To access your dashboard, you need to be logged in"
-msgstr "ダッシュボードにアクセスするにはログインが必要です"
-
-# src/routes/user.rs:158
-msgid "You are no longer following {}."
-msgstr ""
-
-# src/routes/user.rs:174
-msgid "You are now following {}."
-msgstr ""
-
-# src/routes/user.rs:244
-msgid "To subscribe to someone, you need to be logged in"
-msgstr "誰かをフォローするにはログインが必要です"
-
-# src/routes/user.rs:344
-msgid "To edit your profile, you need to be logged in"
-msgstr "プロフィールを編集するにはログインが必要です"
-
 #, fuzzy
 msgid "Your profile has been updated."
 msgstr "メディアがまだありません。"
@@ -240,10 +106,6 @@ msgstr "メディアがまだありません。"
 #, fuzzy
 msgid "Your account has been deleted."
 msgstr "メディアがまだありません。"
-
-# src/routes/user.rs:411
-msgid "You can't delete someone else's account."
-msgstr ""
 
 # src/routes/user.rs:473
 msgid "Registrations are closed on this instance."
@@ -255,396 +117,14 @@ msgid ""
 "use it."
 msgstr ""
 
-msgid "Internal server error"
-msgstr "内部サーバーエラー"
-
-msgid "Something broke on our side."
-msgstr "サーバー側で何らかの問題が発生しました。"
-
-msgid "Sorry about that. If you think this is a bug, please report it."
+msgid "Squs"
 msgstr ""
-"申し訳ありません。これがバグだと思われる場合は、問題を報告してください。"
-
-msgid "You are not authorized."
-msgstr "許可されていません。"
-
-msgid "Page not found"
-msgstr "ページが見つかりません"
-
-msgid "We couldn't find this page."
-msgstr "このページは見つかりませんでした。"
-
-msgid "The link that led you here may be broken."
-msgstr "このリンクは切れている可能性があります。"
-
-msgid "The content you sent can't be processed."
-msgstr "送信された内容を処理できません。"
-
-msgid "Maybe it was too long."
-msgstr "長すぎる可能性があります。"
-
-msgid "Invalid CSRF token"
-msgstr "無効な CSRF トークンです"
-
-msgid ""
-"Something is wrong with your CSRF token. Make sure cookies are enabled in "
-"you browser, and try reloading this page. If you continue to see this error "
-"message, please report it."
-msgstr ""
-"CSRF トークンに問題が発生しました。お使いのブラウザーで Cookie が有効になって"
-"いることを確認して、このページを再読み込みしてみてください。このエラーメッ"
-"セージが表示され続ける場合は、問題を報告してください。"
-
-msgid "Articles tagged \"{0}\""
-msgstr "\"{0}\" タグがついた投稿"
-
-msgid "There are currently no articles with such a tag"
-msgstr "現在このタグがついた投稿はありません"
-
-msgid "New Blog"
-msgstr "新しいブログ"
-
-msgid "Create a blog"
-msgstr "ブログを作成"
-
-msgid "Title"
-msgstr "タイトル"
-
-# src/template_utils.rs:220
-msgid "Optional"
-msgstr "省略可"
-
-msgid "Create blog"
-msgstr "ブログを作成"
-
-msgid "Edit \"{}\""
-msgstr "\"{}\" を編集"
-
-msgid "Description"
-msgstr "説明"
-
-msgid "Markdown syntax is supported"
-msgstr "Markdown 記法に対応しています。"
-
-msgid ""
-"You can upload images to your gallery, to use them as blog icons, or banners."
-msgstr ""
-"ギャラリーにアップロードした画像を、ブログアイコンやバナーに使用できます。"
-
-msgid "Upload images"
-msgstr "画像をアップロード"
-
-msgid "Blog icon"
-msgstr "ブログアイコン"
-
-msgid "Blog banner"
-msgstr "ブログバナー"
-
-msgid "Update blog"
-msgstr "ブログを更新"
-
-msgid "Danger zone"
-msgstr "危険な設定"
-
-msgid "Be very careful, any action taken here can't be reversed."
-msgstr "ここで行われた操作は元に戻せません。十分注意してください。"
-
-msgid "Permanently delete this blog"
-msgstr "このブログを完全に削除"
-
-msgid "{}'s icon"
-msgstr "{} さんのアイコン"
-
-msgid "Edit"
-msgstr "編集"
-
-msgid "There's one author on this blog: "
-msgid_plural "There are {0} authors on this blog: "
-msgstr[0] "このブログには {0} 人の投稿者がいます: "
-
-msgid "Latest articles"
-msgstr "最新の投稿"
-
-msgid "No posts to see here yet."
-msgstr "ここには表示できる投稿はまだありません。"
-
-#, fuzzy
-msgid "Search result(s) for \"{0}\""
-msgstr "\"{0}\" の検索結果"
-
-#, fuzzy
-msgid "Search result(s)"
-msgstr "検索結果"
-
-#, fuzzy
-msgid "No results for your query"
-msgstr "検索結果はありません"
-
-msgid "No more results for your query"
-msgstr "これ以上の検索結果はありません"
-
-msgid "Search"
-msgstr "検索"
-
-msgid "Your query"
-msgstr "検索用語"
-
-msgid "Advanced search"
-msgstr "高度な検索"
-
-# src/template_utils.rs:305
-msgid "Article title matching these words"
-msgstr "投稿のタイトルに一致する語句"
-
-# src/template_utils.rs:305
-msgid "Subtitle matching these words"
-msgstr "サブタイトルに一致する語句"
-
-msgid "Subtitle - byline"
-msgstr "サブタイトル - 投稿者名"
-
-# src/template_utils.rs:305
-msgid "Content matching these words"
-msgstr "内容に一致する語句"
-
-msgid "Body content"
-msgstr "本文の内容"
-
-# src/template_utils.rs:305
-msgid "From this date"
-msgstr "この日付以降を検索"
-
-# src/template_utils.rs:305
-msgid "To this date"
-msgstr "この日付以前を検索"
-
-# src/template_utils.rs:305
-msgid "Containing these tags"
-msgstr "含まれるタグ"
-
-msgid "Tags"
-msgstr "タグ"
-
-# src/template_utils.rs:305
-msgid "Posted on one of these instances"
-msgstr "以下のいずれかのインスタンスに投稿"
-
-msgid "Instance domain"
-msgstr "インスタンスのドメイン"
-
-# src/template_utils.rs:305
-msgid "Posted by one of these authors"
-msgstr "以下のいずれかの投稿者が投稿"
-
-#, fuzzy
-msgid "Author(s)"
-msgstr "投稿者"
-
-# src/template_utils.rs:305
-msgid "Posted on one of these blogs"
-msgstr "以下のいずれかのブログに投稿"
-
-msgid "Blog title"
-msgstr "ブログのタイトル"
-
-# src/template_utils.rs:305
-msgid "Written in this language"
-msgstr "投稿の言語"
-
-msgid "Language"
-msgstr "言語"
-
-# src/template_utils.rs:305
-msgid "Published under this license"
-msgstr "適用されているライセンス"
-
-msgid "Article license"
-msgstr "投稿のライセンス"
-
-msgid "Interact with {}"
-msgstr ""
-
-#, fuzzy
-msgid "Log in to interact"
-msgstr "いいねするにはログインしてください"
-
-msgid "Enter your full username to interact"
-msgstr ""
-
-msgid "Publish"
-msgstr "公開"
-
-msgid "Classic editor (any changes will be lost)"
-msgstr "クラシックエディター (すべての変更を破棄します)"
-
-# src/template_utils.rs:217
-msgid "Subtitle"
-msgstr "サブタイトル"
-
-msgid "Content"
-msgstr "コンテンツ"
-
-msgid ""
-"You can upload media to your gallery, and then copy their Markdown code into "
-"your articles to insert them."
-msgstr ""
-"メディアをギャラリーにアップロードして、その Markdown コードをコピーして投稿"
-"に挿入できます。"
-
-msgid "Upload media"
-msgstr "メディアをアップロード"
-
-# src/template_utils.rs:217
-msgid "Tags, separated by commas"
-msgstr "タグ (コンマ区切り)"
-
-# src/template_utils.rs:217
-msgid "License"
-msgstr "ライセンス"
-
-# src/template_utils.rs:225
-msgid "Leave it empty to reserve all rights"
-msgstr "すべての権利を保持するには空欄にしてください"
-
-msgid "Illustration"
-msgstr "図"
-
-msgid "This is a draft, don't publish it yet."
-msgstr "これは下書きなので、まだ公開しないでください。"
-
-msgid "Update"
-msgstr "更新"
-
-msgid "Update, or publish"
-msgstr "更新または公開"
-
-msgid "Publish your post"
-msgstr "投稿を公開"
-
-msgid "Written by {0}"
-msgstr "投稿者 {0}"
-
-msgid "All rights reserved."
-msgstr "著作権は投稿者が保有しています。"
-
-msgid "This article is under the {0} license."
-msgstr "この投稿は、{0} ライセンスの元で公開されています。"
-
-msgid "One like"
-msgid_plural "{0} likes"
-msgstr[0] "{0} いいね"
-
-msgid "I don't like this anymore"
-msgstr "このいいねを取り消します"
-
-msgid "Add yours"
-msgstr "いいねする"
-
-msgid "One boost"
-msgid_plural "{0} boosts"
-msgstr[0] "{0} ブースト"
-
-msgid "I don't want to boost this anymore"
-msgstr "このブーストを取り消します"
-
-msgid "Boost"
-msgstr "ブースト"
-
-msgid ""
-"{0}Log in{1}, or {2}use your Fediverse account{3} to interact with this "
-"article"
-msgstr ""
-
-msgid "Unsubscribe"
-msgstr "フォロー解除"
-
-msgid "Subscribe"
-msgstr "フォロー"
-
-msgid "Comments"
-msgstr "コメント"
-
-# src/template_utils.rs:217
-msgid "Content warning"
-msgstr "コンテンツの警告"
-
-msgid "Your comment"
-msgstr "あなたのコメント"
-
-msgid "Submit comment"
-msgstr "コメントを保存"
-
-msgid "No comments yet. Be the first to react!"
-msgstr "コメントがまだありません。最初のコメントを書きましょう！"
-
-msgid "Are you sure?"
-msgstr "本当によろしいですか？"
-
-msgid "Delete"
-msgstr "削除"
-
-msgid "This article is still a draft. Only you and other authors can see it."
-msgstr ""
-
-msgid "Only you and other authors can edit this article."
-msgstr ""
-
-msgid "Media upload"
-msgstr "メディアのアップロード"
-
-msgid "Useful for visually impaired people, as well as licensing information"
-msgstr "ライセンス情報と同様に、視覚に障害のある方に役立ちます"
-
-msgid "Leave it empty, if none is needed"
-msgstr "何も必要でない場合は、空欄にしてください"
-
-msgid "File"
-msgstr "ファイル"
-
-msgid "Send"
-msgstr "送信"
-
-msgid "Your media"
-msgstr "メディア"
-
-msgid "Upload"
-msgstr "アップロード"
-
-msgid "You don't have any media yet."
-msgstr "メディアがまだありません。"
-
-msgid "Content warning: {0}"
-msgstr "コンテンツの警告: {0}"
-
-msgid "Details"
-msgstr "詳細"
-
-msgid "Media details"
-msgstr "メディアの詳細"
-
-msgid "Go back to the gallery"
-msgstr "ギャラリーに戻る"
-
-msgid "Markdown syntax"
-msgstr "Markdown 記法"
-
-msgid "Copy it into your articles, to insert this media:"
-msgstr "このメディアを挿入するには、これを投稿にコピーしてください。"
-
-msgid "Use as an avatar"
-msgstr "アバターとして使う"
-
-msgid "Notifications"
-msgstr "通知"
-
-msgid "Plume"
-msgstr "Plume"
 
 msgid "Menu"
 msgstr "メニュー"
 
-msgid "Dashboard"
-msgstr "ダッシュボード"
+msgid "Notifications"
+msgstr "通知"
 
 msgid "Log Out"
 msgstr "ログアウト"
@@ -667,59 +147,49 @@ msgstr ""
 msgid "Administration"
 msgstr "管理"
 
-msgid "Documentation"
-msgstr ""
-
 msgid "Source code"
 msgstr "ソースコード"
 
-msgid "Matrix room"
-msgstr "Matrix ルーム"
-
-msgid "Your feed"
-msgstr "自分のフィード"
-
-msgid "Federated feed"
-msgstr "全インスタンスのフィード"
-
-msgid "Local feed"
-msgstr "このインスタンスのフィード"
-
-msgid "Nothing to see here yet. Try subscribing to more people."
-msgstr ""
-"ここに表示できるものはまだありません。もっとたくさんの人をフォローしてみま"
-"しょう。"
-
-msgid "Articles from {}"
-msgstr "{} の投稿"
-
-msgid "All the articles of the Fediverse"
-msgstr "Fediverse のすべての投稿"
-
-msgid "Users"
-msgstr "ユーザー"
-
-msgid "Configuration"
-msgstr "設定"
-
-msgid "Instances"
-msgstr "インスタンス"
-
-msgid "Ban"
-msgstr "禁止"
+msgid "Welcome to {}"
+msgstr "{} へようこそ"
 
 msgid "Administration of {0}"
 msgstr "{0} の管理"
 
+msgid "Instances"
+msgstr "インスタンス"
+
+msgid "Configuration"
+msgstr "設定"
+
+msgid "Users"
+msgstr "ユーザー"
+
+msgid "Unblock"
+msgstr "ブロック解除"
+
+msgid "Block"
+msgstr "ブロック"
+
+msgid "Ban"
+msgstr "禁止"
+
 # src/template_utils.rs:217
 msgid "Name"
 msgstr "名前"
+
+# src/template_utils.rs:220
+msgid "Optional"
+msgstr "省略可"
 
 msgid "Allow anyone to register here"
 msgstr "不特定多数に登録を許可"
 
 msgid "Short description"
 msgstr ""
+
+msgid "Markdown syntax is supported"
+msgstr "Markdown 記法に対応しています。"
 
 msgid "Long description"
 msgstr "長い説明"
@@ -734,19 +204,12 @@ msgstr "設定を保存"
 msgid "About {0}"
 msgstr "{0} について"
 
-msgid "Runs Plume {0}"
+#, fuzzy
+msgid "Runs Squs {0}"
 msgstr "Plume {0} を実行中"
 
-msgid "Home to <em>{0}</em> people"
-msgstr "ユーザー登録者数 <em>{0}</em> 人"
-
-msgid "Who wrote <em>{0}</em> articles"
-msgstr "投稿記事数 <em>{0}</em> 件"
-
-msgid "And are connected to <em>{0}</em> other instances"
-msgstr "他のインスタンスからの接続数 <em>{0}</em>"
-
-msgid "Administred by"
+#, fuzzy
+msgid "Administred by {}"
 msgstr "管理者"
 
 msgid ""
@@ -766,91 +229,37 @@ msgid ""
 "other cookies."
 msgstr ""
 
-msgid "Welcome to {}"
-msgstr "{} へようこそ"
+msgid "Edit your account"
+msgstr "アカウントを編集"
 
-msgid "Unblock"
-msgstr "ブロック解除"
-
-msgid "Block"
-msgstr "ブロック"
-
-msgid "Reset your password"
-msgstr "パスワードをリセット"
+msgid "Your Profile"
+msgstr "プロフィール"
 
 # src/template_utils.rs:217
-msgid "New password"
-msgstr "新しいパスワード"
+msgid "Display name"
+msgstr "表示名"
 
 # src/template_utils.rs:217
-msgid "Confirmation"
-msgstr "確認"
+msgid "Email"
+msgstr "メールアドレス"
 
-msgid "Update password"
-msgstr "パスワードを更新"
+msgid "Summary"
+msgstr "概要"
 
-msgid "Log in"
-msgstr "ログイン"
+msgid "Update account"
+msgstr "アカウントを更新"
 
-# src/template_utils.rs:217
-msgid "Username, or email"
-msgstr "ユーザー名またはメールアドレス"
+msgid "Danger zone"
+msgstr "危険な設定"
 
-# src/template_utils.rs:217
-msgid "Password"
-msgstr "パスワード"
+msgid "Be very careful, any action taken here can't be cancelled."
+msgstr "ここで行われた操作は取り消しできません。十分注意してください。"
 
-# src/template_utils.rs:217
-msgid "E-mail"
-msgstr "メール"
+msgid "Delete your account"
+msgstr "アカウントを削除"
 
-msgid "Send password reset link"
-msgstr "パスワードリセットリンクを送信"
-
-msgid "Check your inbox!"
-msgstr "受信トレイを確認してください！"
-
-msgid ""
-"We sent a mail to the address you gave us, with a link to reset your "
-"password."
-msgstr ""
-"指定された宛先に、パスワードをリセットするためのリンクを記載したメールを送信"
-"しました。"
-
-msgid "Admin"
-msgstr "管理者"
-
-msgid "It is you"
-msgstr "自分"
-
-msgid "Edit your profile"
-msgstr "プロフィールを編集"
-
-msgid "Open on {0}"
-msgstr "{0} で開く"
-
-#, fuzzy
-msgid "Follow {}"
-msgstr "フォロー"
-
-#, fuzzy
-msgid "Log in to follow"
-msgstr "ブーストするにはログインしてください"
-
-msgid "Enter your full username handle to follow"
-msgstr ""
-
-msgid "{0}'s subscriptions"
-msgstr ""
-
-msgid "Articles"
-msgstr "投稿"
-
-msgid "Subscribers"
-msgstr "フォロワー"
-
-msgid "Subscriptions"
-msgstr "フォロー"
+msgid "Sorry, but as an admin, you can't leave your own instance."
+msgstr "申し訳ありませんが、管理者は自身のインスタンスから離脱できません。"
 
 msgid "Create your account"
 msgstr "アカウントを作成"
@@ -863,8 +272,8 @@ msgid "Username"
 msgstr "ユーザー名"
 
 # src/template_utils.rs:217
-msgid "Email"
-msgstr "メールアドレス"
+msgid "Password"
+msgstr "パスワード"
 
 # src/template_utils.rs:217
 msgid "Password confirmation"
@@ -877,66 +286,32 @@ msgstr ""
 "申し訳ありませんが、このインスタンスでの登録は限定されています。ですが、他の"
 "インスタンスを見つけることはできます。"
 
+msgid "Home"
+msgstr ""
+
+msgid "Subscribers"
+msgstr "フォロワー"
+
+msgid "Latest articles"
+msgstr "最新の投稿"
+
+msgid "Admin"
+msgstr "管理者"
+
+msgid "Edit your profile"
+msgstr "プロフィールを編集"
+
 msgid "{0}'s subscribers"
 msgstr "{0} のフォロワー"
 
-msgid "Edit your account"
-msgstr "アカウントを編集"
+msgid "Respond"
+msgstr "返信"
 
-msgid "Your Profile"
-msgstr "プロフィール"
+msgid "Are you sure?"
+msgstr "本当によろしいですか？"
 
-msgid ""
-"To change your avatar, upload it to your gallery and then select from there."
-msgstr "アバターを変更するには、ギャラリーにアップロードして選択してください。"
-
-msgid "Upload an avatar"
-msgstr "アバターをアップロード"
-
-# src/template_utils.rs:217
-msgid "Display name"
-msgstr "表示名"
-
-msgid "Summary"
-msgstr "概要"
-
-msgid "Update account"
-msgstr "アカウントを更新"
-
-msgid "Be very careful, any action taken here can't be cancelled."
-msgstr "ここで行われた操作は取り消しできません。十分注意してください。"
-
-msgid "Delete your account"
-msgstr "アカウントを削除"
-
-msgid "Sorry, but as an admin, you can't leave your own instance."
-msgstr "申し訳ありませんが、管理者は自身のインスタンスから離脱できません。"
-
-msgid "Your Dashboard"
-msgstr "ダッシュボード"
-
-msgid "Your Blogs"
-msgstr "ブログ"
-
-msgid "You don't have any blog yet. Create your own, or ask to join one."
-msgstr ""
-"ブログはまだありません。ご自身のブログを作成するか、他の人のブログに参加でき"
-"るか確認しましょう。"
-
-msgid "Start a new blog"
-msgstr "新しいブログを開始"
-
-msgid "Your Drafts"
-msgstr "下書き"
-
-msgid "Go to your gallery"
-msgstr "ギャラリーを参照"
-
-msgid "Atom feed"
-msgstr "Atom フィード"
-
-msgid "Recently boosted"
-msgstr "最近ブーストしたもの"
+msgid "Delete this comment"
+msgstr "このコメントを削除"
 
 msgid "What is Plume?"
 msgstr "Plume とは？"
@@ -954,45 +329,635 @@ msgstr ""
 "投稿は他の Plume インスタンスからも閲覧可能であり、Mastdon のように他のプラッ"
 "トフォームから直接記事にアクセスできます。"
 
+msgid "Home to <em>{0}</em> people"
+msgstr "ユーザー登録者数 <em>{0}</em> 人"
+
+msgid "Who wrote <em>{0}</em> articles"
+msgstr "投稿記事数 <em>{0}</em> 件"
+
 msgid "Read the detailed rules"
 msgstr "詳細な規則を読む"
 
-msgid "View all"
-msgstr "すべて表示"
+msgid "Delete"
+msgstr "削除"
 
-msgid "None"
-msgstr "なし"
-
-msgid "No description"
-msgstr "説明がありません"
-
-msgid "By {0}"
-msgstr "投稿者 {0}"
-
-msgid "Draft"
-msgstr "下書き"
-
-msgid "Respond"
-msgstr "返信"
-
-msgid "Delete this comment"
-msgstr "このコメントを削除"
-
-#, fuzzy
-msgid "I'm from this instance"
-msgstr "このインスタンスについて"
-
-#, fuzzy
-msgid "I'm from another instance"
-msgstr "件"
-
-# src/template_utils.rs:225
-msgid "Example: user@plu.me"
+msgid "Open"
 msgstr ""
 
+msgid "Reset your password"
+msgstr "パスワードをリセット"
+
+# src/template_utils.rs:217
+msgid "New password"
+msgstr "新しいパスワード"
+
+# src/template_utils.rs:217
+msgid "Confirmation"
+msgstr "確認"
+
+msgid "Update password"
+msgstr "パスワードを更新"
+
+msgid "This token has expired"
+msgstr ""
+
+msgid "Please start the process again by clicking"
+msgstr ""
+
+msgid "here"
+msgstr ""
+
+msgid "Check your inbox!"
+msgstr "受信トレイを確認してください！"
+
+msgid ""
+"We sent a mail to the address you gave us, with a link to reset your "
+"password."
+msgstr ""
+"指定された宛先に、パスワードをリセットするためのリンクを記載したメールを送信"
+"しました。"
+
+# src/template_utils.rs:217
+msgid "E-mail"
+msgstr "メール"
+
+msgid "Send password reset link"
+msgstr "パスワードリセットリンクを送信"
+
+msgid "Log in"
+msgstr "ログイン"
+
+# src/template_utils.rs:217
+msgid "Username, or email"
+msgstr "ユーザー名またはメールアドレス"
+
+msgid "Invalid CSRF token"
+msgstr "無効な CSRF トークンです"
+
+msgid ""
+"Something is wrong with your CSRF token. Make sure cookies are enabled in "
+"you browser, and try reloading this page. If you continue to see this error "
+"message, please report it."
+msgstr ""
+"CSRF トークンに問題が発生しました。お使いのブラウザーで Cookie が有効になって"
+"いることを確認して、このページを再読み込みしてみてください。このエラーメッ"
+"セージが表示され続ける場合は、問題を報告してください。"
+
+msgid "Page not found"
+msgstr "ページが見つかりません"
+
+msgid "We couldn't find this page."
+msgstr "このページは見つかりませんでした。"
+
+msgid "The link that led you here may be broken."
+msgstr "このリンクは切れている可能性があります。"
+
+msgid "The content you sent can't be processed."
+msgstr "送信された内容を処理できません。"
+
+msgid "Maybe it was too long."
+msgstr "長すぎる可能性があります。"
+
+msgid "You are not authorized."
+msgstr "許可されていません。"
+
+msgid "Internal server error"
+msgstr "内部サーバーエラー"
+
+msgid "Something broke on our side."
+msgstr "サーバー側で何らかの問題が発生しました。"
+
+msgid "Sorry about that. If you think this is a bug, please report it."
+msgstr ""
+"申し訳ありません。これがバグだと思われる場合は、問題を報告してください。"
+
 #, fuzzy
-msgid "Continue to your instance"
-msgstr "インスタンスを設定"
+msgid "Comment"
+msgstr "コメント"
+
+#~ msgid "Plume"
+#~ msgstr "Plume"
+
+#~ msgid "Search"
+#~ msgstr "検索"
+
+#~ msgid "Dashboard"
+#~ msgstr "ダッシュボード"
+
+#~ msgid "Matrix room"
+#~ msgstr "Matrix ルーム"
+
+#~ msgid "Recently boosted"
+#~ msgstr "最近ブーストしたもの"
+
+#~ msgid "Your Dashboard"
+#~ msgstr "ダッシュボード"
+
+#~ msgid "Your Blogs"
+#~ msgstr "ブログ"
+
+#~ msgid "You don't have any blog yet. Create your own, or ask to join one."
+#~ msgstr ""
+#~ "ブログはまだありません。ご自身のブログを作成するか、他の人のブログに参加で"
+#~ "きるか確認しましょう。"
+
+#~ msgid "Start a new blog"
+#~ msgstr "新しいブログを開始"
+
+#~ msgid "Your Drafts"
+#~ msgstr "下書き"
+
+#~ msgid "Your media"
+#~ msgstr "メディア"
+
+#~ msgid "Go to your gallery"
+#~ msgstr "ギャラリーを参照"
+
+#~ msgid "Atom feed"
+#~ msgstr "Atom フィード"
+
+#~ msgid "Open on {0}"
+#~ msgstr "{0} で開く"
+
+#~ msgid "Unsubscribe"
+#~ msgstr "フォロー解除"
+
+#~ msgid "Subscribe"
+#~ msgstr "フォロー"
+
+#~ msgid "Your feed"
+#~ msgstr "自分のフィード"
+
+#~ msgid "Federated feed"
+#~ msgstr "全インスタンスのフィード"
+
+#~ msgid "Local feed"
+#~ msgstr "このインスタンスのフィード"
+
+#~ msgid "And are connected to <em>{0}</em> other instances"
+#~ msgstr "他のインスタンスからの接続数 <em>{0}</em>"
+
+#~ msgid ""
+#~ "To change your avatar, upload it to your gallery and then select from "
+#~ "there."
+#~ msgstr ""
+#~ "アバターを変更するには、ギャラリーにアップロードして選択してください。"
+
+#~ msgid "Upload an avatar"
+#~ msgstr "アバターをアップロード"
+
+# src/routes/reshares.rs:51
+#~ msgid "To reshare a post, you need to be logged in"
+#~ msgstr "投稿を再共有するにはログインが必要です"
+
+#~ msgid "Articles"
+#~ msgstr "投稿"
+
+#~ msgid "Subscriptions"
+#~ msgstr "フォロー"
+
+#~ msgid "It is you"
+#~ msgstr "自分"
+
+#~ msgid "By {0}"
+#~ msgstr "投稿者 {0}"
+
+#~ msgid "Draft"
+#~ msgstr "下書き"
+
+#~ msgid "All the articles of the Fediverse"
+#~ msgstr "Fediverse のすべての投稿"
+
+#~ msgid "Articles from {}"
+#~ msgstr "{} の投稿"
+
+#~ msgid "Nothing to see here yet. Try subscribing to more people."
+#~ msgstr ""
+#~ "ここに表示できるものはまだありません。もっとたくさんの人をフォローしてみま"
+#~ "しょう。"
+
+#, fuzzy
+#~ msgid "Follow {}"
+#~ msgstr "フォロー"
+
+#, fuzzy
+#~ msgid "Log in to follow"
+#~ msgstr "ブーストするにはログインしてください"
+
+#~ msgid "None"
+#~ msgstr "なし"
+
+#~ msgid "No description"
+#~ msgstr "説明がありません"
+
+#~ msgid "View all"
+#~ msgstr "すべて表示"
+
+#~ msgid "Your query"
+#~ msgstr "検索用語"
+
+#~ msgid "Advanced search"
+#~ msgstr "高度な検索"
+
+# src/template_utils.rs:305
+#~ msgid "Article title matching these words"
+#~ msgstr "投稿のタイトルに一致する語句"
+
+#~ msgid "Title"
+#~ msgstr "タイトル"
+
+# src/template_utils.rs:305
+#~ msgid "Subtitle matching these words"
+#~ msgstr "サブタイトルに一致する語句"
+
+#~ msgid "Subtitle - byline"
+#~ msgstr "サブタイトル - 投稿者名"
+
+# src/template_utils.rs:305
+#~ msgid "Content matching these words"
+#~ msgstr "内容に一致する語句"
+
+#~ msgid "Body content"
+#~ msgstr "本文の内容"
+
+# src/template_utils.rs:305
+#~ msgid "From this date"
+#~ msgstr "この日付以降を検索"
+
+# src/template_utils.rs:305
+#~ msgid "To this date"
+#~ msgstr "この日付以前を検索"
+
+# src/template_utils.rs:305
+#~ msgid "Containing these tags"
+#~ msgstr "含まれるタグ"
+
+#~ msgid "Tags"
+#~ msgstr "タグ"
+
+# src/template_utils.rs:305
+#~ msgid "Posted on one of these instances"
+#~ msgstr "以下のいずれかのインスタンスに投稿"
+
+#~ msgid "Instance domain"
+#~ msgstr "インスタンスのドメイン"
+
+# src/template_utils.rs:305
+#~ msgid "Posted by one of these authors"
+#~ msgstr "以下のいずれかの投稿者が投稿"
+
+#, fuzzy
+#~ msgid "Author(s)"
+#~ msgstr "投稿者"
+
+# src/template_utils.rs:305
+#~ msgid "Posted on one of these blogs"
+#~ msgstr "以下のいずれかのブログに投稿"
+
+#~ msgid "Blog title"
+#~ msgstr "ブログのタイトル"
+
+# src/template_utils.rs:305
+#~ msgid "Written in this language"
+#~ msgstr "投稿の言語"
+
+#~ msgid "Language"
+#~ msgstr "言語"
+
+# src/template_utils.rs:305
+#~ msgid "Published under this license"
+#~ msgstr "適用されているライセンス"
+
+#~ msgid "Article license"
+#~ msgstr "投稿のライセンス"
+
+#, fuzzy
+#~ msgid "Search result(s) for \"{0}\""
+#~ msgstr "\"{0}\" の検索結果"
+
+#, fuzzy
+#~ msgid "Search result(s)"
+#~ msgstr "検索結果"
+
+#, fuzzy
+#~ msgid "No results for your query"
+#~ msgstr "検索結果はありません"
+
+#~ msgid "No more results for your query"
+#~ msgstr "これ以上の検索結果はありません"
+
+#, fuzzy
+#~ msgid "Log in to interact"
+#~ msgstr "いいねするにはログインしてください"
+
+#~ msgid "Publish"
+#~ msgstr "公開"
+
+#~ msgid "Classic editor (any changes will be lost)"
+#~ msgstr "クラシックエディター (すべての変更を破棄します)"
+
+# src/template_utils.rs:217
+#~ msgid "Subtitle"
+#~ msgstr "サブタイトル"
+
+#~ msgid "Content"
+#~ msgstr "コンテンツ"
+
+#~ msgid ""
+#~ "You can upload media to your gallery, and then copy their Markdown code "
+#~ "into your articles to insert them."
+#~ msgstr ""
+#~ "メディアをギャラリーにアップロードして、その Markdown コードをコピーして投"
+#~ "稿に挿入できます。"
+
+#~ msgid "Upload media"
+#~ msgstr "メディアをアップロード"
+
+# src/template_utils.rs:217
+#~ msgid "Tags, separated by commas"
+#~ msgstr "タグ (コンマ区切り)"
+
+# src/template_utils.rs:217
+#~ msgid "License"
+#~ msgstr "ライセンス"
+
+# src/template_utils.rs:225
+#~ msgid "Leave it empty to reserve all rights"
+#~ msgstr "すべての権利を保持するには空欄にしてください"
+
+#~ msgid "Illustration"
+#~ msgstr "図"
+
+#~ msgid "This is a draft, don't publish it yet."
+#~ msgstr "これは下書きなので、まだ公開しないでください。"
+
+#~ msgid "Update"
+#~ msgstr "更新"
+
+#~ msgid "Update, or publish"
+#~ msgstr "更新または公開"
+
+#~ msgid "Publish your post"
+#~ msgstr "投稿を公開"
+
+#~ msgid "Written by {0}"
+#~ msgstr "投稿者 {0}"
+
+#~ msgid "All rights reserved."
+#~ msgstr "著作権は投稿者が保有しています。"
+
+#~ msgid "This article is under the {0} license."
+#~ msgstr "この投稿は、{0} ライセンスの元で公開されています。"
+
+#~ msgid "One like"
+#~ msgid_plural "{0} likes"
+#~ msgstr[0] "{0} いいね"
+
+#~ msgid "I don't like this anymore"
+#~ msgstr "このいいねを取り消します"
+
+#~ msgid "Add yours"
+#~ msgstr "いいねする"
+
+#~ msgid "One boost"
+#~ msgid_plural "{0} boosts"
+#~ msgstr[0] "{0} ブースト"
+
+#~ msgid "I don't want to boost this anymore"
+#~ msgstr "このブーストを取り消します"
+
+#~ msgid "Boost"
+#~ msgstr "ブースト"
+
+# src/template_utils.rs:217
+#~ msgid "Content warning"
+#~ msgstr "コンテンツの警告"
+
+#~ msgid "Your comment"
+#~ msgstr "あなたのコメント"
+
+#~ msgid "Submit comment"
+#~ msgstr "コメントを保存"
+
+#~ msgid "No comments yet. Be the first to react!"
+#~ msgstr "コメントがまだありません。最初のコメントを書きましょう！"
+
+#~ msgid "Edit"
+#~ msgstr "編集"
+
+#~ msgid "Edit \"{}\""
+#~ msgstr "\"{}\" を編集"
+
+#~ msgid "Description"
+#~ msgstr "説明"
+
+#~ msgid ""
+#~ "You can upload images to your gallery, to use them as blog icons, or "
+#~ "banners."
+#~ msgstr ""
+#~ "ギャラリーにアップロードした画像を、ブログアイコンやバナーに使用できます。"
+
+#~ msgid "Upload images"
+#~ msgstr "画像をアップロード"
+
+#~ msgid "Blog icon"
+#~ msgstr "ブログアイコン"
+
+#~ msgid "Blog banner"
+#~ msgstr "ブログバナー"
+
+#~ msgid "Update blog"
+#~ msgstr "ブログを更新"
+
+#~ msgid "Be very careful, any action taken here can't be reversed."
+#~ msgstr "ここで行われた操作は元に戻せません。十分注意してください。"
+
+#, fuzzy
+#~ msgid "Are you sure that you want to permanently delete this blog?"
+#~ msgstr "このブログを完全に削除"
+
+#~ msgid "Permanently delete this blog"
+#~ msgstr "このブログを完全に削除"
+
+#~ msgid "New Blog"
+#~ msgstr "新しいブログ"
+
+#~ msgid "Create a blog"
+#~ msgstr "ブログを作成"
+
+#~ msgid "Create blog"
+#~ msgstr "ブログを作成"
+
+#~ msgid "{}'s icon"
+#~ msgstr "{} さんのアイコン"
+
+#~ msgid "New article"
+#~ msgstr "新しい投稿"
+
+#~ msgid "There's one author on this blog: "
+#~ msgid_plural "There are {0} authors on this blog: "
+#~ msgstr[0] "このブログには {0} 人の投稿者がいます: "
+
+#~ msgid "No posts to see here yet."
+#~ msgstr "ここには表示できる投稿はまだありません。"
+
+#~ msgid "Articles tagged \"{0}\""
+#~ msgstr "\"{0}\" タグがついた投稿"
+
+#~ msgid "There are currently no articles with such a tag"
+#~ msgstr "現在このタグがついた投稿はありません"
+
+#, fuzzy
+#~ msgid "I'm from this instance"
+#~ msgstr "このインスタンスについて"
+
+#, fuzzy
+#~ msgid "I'm from another instance"
+#~ msgstr "件"
+
+#, fuzzy
+#~ msgid "Continue to your instance"
+#~ msgstr "インスタンスを設定"
+
+#~ msgid "Upload"
+#~ msgstr "アップロード"
+
+#~ msgid "You don't have any media yet."
+#~ msgstr "メディアがまだありません。"
+
+#~ msgid "Content warning: {0}"
+#~ msgstr "コンテンツの警告: {0}"
+
+#~ msgid "Details"
+#~ msgstr "詳細"
+
+#~ msgid "Media upload"
+#~ msgstr "メディアのアップロード"
+
+#~ msgid ""
+#~ "Useful for visually impaired people, as well as licensing information"
+#~ msgstr "ライセンス情報と同様に、視覚に障害のある方に役立ちます"
+
+#~ msgid "Leave it empty, if none is needed"
+#~ msgstr "何も必要でない場合は、空欄にしてください"
+
+#~ msgid "File"
+#~ msgstr "ファイル"
+
+#~ msgid "Send"
+#~ msgstr "送信"
+
+#~ msgid "Media details"
+#~ msgstr "メディアの詳細"
+
+#~ msgid "Go back to the gallery"
+#~ msgstr "ギャラリーに戻る"
+
+#~ msgid "Markdown syntax"
+#~ msgstr "Markdown 記法"
+
+#~ msgid "Copy it into your articles, to insert this media:"
+#~ msgstr "このメディアを挿入するには、これを投稿にコピーしてください。"
+
+#~ msgid "Use as an avatar"
+#~ msgstr "アバターとして使う"
+
+# src/routes/likes.rs:51
+#~ msgid "To like a post, you need to be logged in"
+#~ msgstr "投稿をいいねするにはログインが必要です"
+
+# src/routes/notifications.rs:29
+#~ msgid "To see your notifications, you need to be logged in"
+#~ msgstr "通知を表示するにはログインが必要です"
+
+# src/routes/posts.rs:93
+#~ msgid "This post isn't published yet."
+#~ msgstr "この投稿はまだ公開されていません。"
+
+# src/routes/posts.rs:122
+#~ msgid "To write a new post, you need to be logged in"
+#~ msgstr "新しい投稿を書くにはログインが必要です"
+
+# src/routes/posts.rs:140
+#~ msgid "You are not an author of this blog."
+#~ msgstr "あなたはこのブログの投稿者ではありません。"
+
+# src/routes/posts.rs:147
+#~ msgid "New post"
+#~ msgstr "新しい投稿"
+
+# src/routes/posts.rs:192
+#~ msgid "Edit {0}"
+#~ msgstr "{0} を編集"
+
+# src/routes/blogs.rs:217
+#, fuzzy
+#~ msgid "You are not allowed to publish on this blog."
+#~ msgstr "このブログを編集する権限がありません。"
+
+#, fuzzy
+#~ msgid "Your article has been updated."
+#~ msgstr "メディアがまだありません。"
+
+#, fuzzy
+#~ msgid "Your article has been saved."
+#~ msgstr "メディアがまだありません。"
+
+# src/routes/user.rs:136
+#~ msgid "To access your dashboard, you need to be logged in"
+#~ msgstr "ダッシュボードにアクセスするにはログインが必要です"
+
+# src/routes/user.rs:244
+#~ msgid "To subscribe to someone, you need to be logged in"
+#~ msgstr "誰かをフォローするにはログインが必要です"
+
+# src/routes/user.rs:344
+#~ msgid "To edit your profile, you need to be logged in"
+#~ msgstr "プロフィールを編集するにはログインが必要です"
+
+# src/routes/blogs.rs:70
+#~ msgid "To create a new blog, you need to be logged in"
+#~ msgstr "新しいブログを作成するにはログインが必要です"
+
+# src/routes/session.rs:259
+#, fuzzy
+#~ msgid "Your blog was successfully created!"
+#~ msgstr "パスワードが正常にリセットされました。"
+
+# src/routes/blogs.rs:172
+#~ msgid "You are not allowed to delete this blog."
+#~ msgstr "このブログを削除する権限がありません。"
+
+# src/routes/blogs.rs:217
+#~ msgid "You are not allowed to edit this blog."
+#~ msgstr "このブログを編集する権限がありません。"
+
+# src/routes/blogs.rs:262
+#~ msgid "You can't use this media as a blog icon."
+#~ msgstr "このメディアはブログアイコンに使用できません。"
+
+# src/routes/blogs.rs:280
+#~ msgid "You can't use this media as a blog banner."
+#~ msgstr "このメディアはブログバナーに使用できません。"
+
+# src/routes/blogs.rs:172
+#, fuzzy
+#~ msgid "You are not allowed to delete this media."
+#~ msgstr "このブログを削除する権限がありません。"
+
+#, fuzzy
+#~ msgid "Your avatar has been updated."
+#~ msgstr "メディアがまだありません。"
+
+# src/routes/blogs.rs:217
+#, fuzzy
+#~ msgid "You are not allowed to use this media."
+#~ msgstr "このブログを編集する権限がありません。"
+
+# src/routes/session.rs:263
+#~ msgid "Sorry, but the link expired. Try again"
+#~ msgstr ""
+#~ "申し訳ありませんが、リンクの有効期限が切れています。もう一度お試しください"
 
 #~ msgid "Delete this article"
 #~ msgstr "この投稿を削除"

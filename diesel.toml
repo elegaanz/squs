@@ -2,4 +2,4 @@
 # see diesel.rs/guides/configuring-diesel-cli
 
 [print_schema]
-file = "plume-models/src/schema.rs"
+file = "squs-models/src/schema.rs"

@@ -1,4 +1,4 @@
-use plume_models::{Error, PlumeRocket};
+use squs_models::{Error, PlumeRocket};
 use rocket::{
     response::{self, Responder},
     Request,

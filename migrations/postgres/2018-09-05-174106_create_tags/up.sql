@@ -1,7 +1,0 @@
--- Your SQL goes here
-CREATE TABLE tags (
-    id SERIAL PRIMARY KEY,
-    tag TEXT NOT NULL DEFAULT '',
-    is_hastag BOOLEAN NOT NULL DEFAULT 'f',
-    post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE NOT NULL
-)

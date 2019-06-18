@@ -1,9 +1,16 @@
 use rocket_contrib::json::Json;
 
 use crate::api::Api;
-use plume_api::apps::NewAppData;
-use plume_common::utils::random_hex;
-use plume_models::{apps::*, db_conn::DbConn};
+use squs_common::utils::random_hex;
+use squs_models::{apps::*, db_conn::DbConn};
+use serde::{Serialize, Deserialize};
+
+#[derive(Clone, Serialize, Deserialize)]
+pub struct NewAppData {
+    pub name: String,
+    pub website: Option<String>,
+    pub redirect_uri: Option<String>,
+}
 
 #[post("/apps", data = "<data>")]
 pub fn create(conn: DbConn, data: Json<NewAppData>) -> Api<App> {

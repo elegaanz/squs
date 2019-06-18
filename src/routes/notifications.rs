@@ -1,8 +1,4 @@
-use rocket::response::{Flash, Redirect};
-use rocket_i18n::I18n;
-
-use plume_common::utils;
-use plume_models::{notifications::Notification, users::User, PlumeRocket};
+use squs_models::{notifications::Notification, users::User, PlumeRocket};
 use routes::{errors::ErrorPage, Page};
 use template_utils::{IntoContext, Ructe};
 
@@ -19,15 +15,4 @@ pub fn notifications(
         page.0,
         Page::total(Notification::count_for_user(&*rockets.conn, &user)? as i32)
     )))
-}
-
-#[get("/notifications?<page>", rank = 2)]
-pub fn notifications_auth(i18n: I18n, page: Option<Page>) -> Flash<Redirect> {
-    utils::requires_login(
-        &i18n!(
-            i18n.catalog,
-            "To see your notifications, you need to be logged in"
-        ),
-        uri!(notifications: page = page),
-    )
 }

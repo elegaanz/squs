@@ -3,7 +3,7 @@ use rocket::response::Content;
 use serde_json;
 use webfinger::*;
 
-use plume_models::{ap_url, blogs::Blog, users::User, PlumeRocket, CONFIG};
+use squs_models::{ap_id, users::User, PlumeRocket, CONFIG};
 
 #[get("/.well-known/nodeinfo")]
 pub fn nodeinfo() -> Content<String> {
@@ -13,11 +13,11 @@ pub fn nodeinfo() -> Content<String> {
             "links": [
                 {
                     "rel": "http://nodeinfo.diaspora.software/ns/schema/2.0",
-                    "href": ap_url(&format!("{domain}/nodeinfo/2.0", domain = CONFIG.base_url.as_str()))
+                    "href": ap_id(&format!("{domain}/nodeinfo/2.0", domain = CONFIG.base_url.as_str()))
                 },
                 {
                     "rel": "http://nodeinfo.diaspora.software/ns/schema/2.1",
-                    "href": ap_url(&format!("{domain}/nodeinfo/2.1", domain = CONFIG.base_url.as_str()))
+                    "href": ap_id(&format!("{domain}/nodeinfo/2.1", domain = CONFIG.base_url.as_str()))
                 }
             ]
         })
@@ -34,7 +34,7 @@ pub fn host_meta() -> String {
         <Link rel="lrdd" type="application/xrd+xml" template="{url}"/>
     </XRD>
     "#,
-        url = ap_url(&format!(
+        url = ap_id(&format!(
             "{domain}/.well-known/webfinger?resource={{uri}}",
             domain = CONFIG.base_url.as_str()
         ))
@@ -51,11 +51,7 @@ impl Resolver<PlumeRocket> for WebfingerResolver {
     fn find(acct: String, ctx: PlumeRocket) -> Result<Webfinger, ResolverError> {
         User::find_by_fqn(&ctx, &acct)
             .and_then(|usr| usr.webfinger(&*ctx.conn))
-            .or_else(|_| {
-                Blog::find_by_fqn(&ctx, &acct)
-                    .and_then(|blog| blog.webfinger(&*ctx.conn))
-                    .or(Err(ResolverError::NotFound))
-            })
+            .or(Err(ResolverError::NotFound))
     }
 }
 

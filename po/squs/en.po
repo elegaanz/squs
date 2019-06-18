@@ -1,0 +1,460 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: squs\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-15 16:33-0700\n"
+"PO-Revision-Date: 2018-06-15 16:33-0700\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# src/template_utils.rs:102
+msgid "{0} commented on your article."
+msgstr "{0} commented on your article."
+
+# src/template_utils.rs:103
+msgid "{0} is subscribed to you."
+msgstr "{0} is subscribed to you."
+
+# src/template_utils.rs:104
+msgid "{0} liked your article."
+msgstr "{0} liked your article."
+
+# src/template_utils.rs:105
+msgid "{0} mentioned you."
+msgstr "{0} mentioned you."
+
+# src/template_utils.rs:106
+msgid "{0} boosted your article."
+msgstr "{0} boosted your article."
+
+# src/template_utils.rs:142
+msgid "{0}'s avatar"
+msgstr "{0}'s avatar"
+
+# src/routes/comments.rs:93
+msgid "Your comment has been posted."
+msgstr "Your comment has been posted."
+
+# src/routes/comments.rs:142
+msgid "Your comment has been deleted."
+msgstr "Your comment has been deleted."
+
+# src/routes/instance.rs:94
+msgid "Instance settings have been saved."
+msgstr "Instance settings have been saved."
+
+# src/routes/instance.rs:126
+msgid "{} has been unblocked."
+msgstr "{} has been unblocked."
+
+# src/routes/instance.rs:128
+msgid "{} has been blocked."
+msgstr "{} has been blocked."
+
+# src/routes/instance.rs:172
+msgid "{} has been banned."
+msgstr "{} has been banned."
+
+# src/routes/posts.rs:42
+msgid "You are not allowed to delete this article."
+msgstr "You are not allowed to delete this article."
+
+# src/routes/posts.rs:67
+msgid "Your article has been deleted."
+msgstr "Your article has been deleted."
+
+# src/routes/posts.rs:72
+msgid ""
+"It looks like the article you tried to delete doesn't exist. Maybe it is "
+"already gone?"
+msgstr ""
+"It looks like the article you tried to delete doesn't exist. Maybe it is "
+"already gone?"
+
+# src/routes/session.rs:106
+msgid "You are now connected."
+msgstr "You are now connected."
+
+# src/routes/session.rs:127
+msgid "You are now logged off."
+msgstr "You are now logged off."
+
+# src/routes/session.rs:172
+msgid "Password reset"
+msgstr "Password reset"
+
+# src/routes/session.rs:173
+msgid "Here is the link to reset your password: {0}"
+msgstr "Here is the link to reset your password: {0}"
+
+# src/routes/session.rs:235
+msgid "Your password was successfully reset."
+msgstr "Your password was successfully reset."
+
+# src/routes/user.rs:110
+msgid "Your profile has been updated."
+msgstr "Your profile has been updated."
+
+# src/routes/user.rs:134
+msgid "Your account has been deleted."
+msgstr "Your account has been deleted."
+
+# src/routes/user.rs:203
+msgid "Registrations are closed on this instance."
+msgstr "Registrations are closed on this instance."
+
+# src/routes/user.rs:227
+msgid ""
+"Your account has been created. Now you just need to log in, before you can "
+"use it."
+msgstr ""
+"Your account has been created. Now you just need to log in, before you can "
+"use it."
+
+msgid "Squs"
+msgstr "Squs"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Log Out"
+msgstr "Log Out"
+
+msgid "My account"
+msgstr "My account"
+
+msgid "Log In"
+msgstr "Log In"
+
+msgid "Register"
+msgstr "Register"
+
+msgid "About this instance"
+msgstr "About this instance"
+
+msgid "Privacy policy"
+msgstr "Privacy policy"
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid "Source code"
+msgstr "Source code"
+
+msgid "Welcome to {}"
+msgstr "Welcome to {}"
+
+msgid "Administration of {0}"
+msgstr "Administration of {0}"
+
+msgid "Instances"
+msgstr "Instances"
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Unblock"
+msgstr "Unblock"
+
+msgid "Block"
+msgstr "Block"
+
+msgid "Ban"
+msgstr "Ban"
+
+# src/template_utils.rs:234
+msgid "Name"
+msgstr "Name"
+
+# src/template_utils.rs:237
+msgid "Optional"
+msgstr "Optional"
+
+msgid "Allow anyone to register here"
+msgstr "Allow anyone to register here"
+
+msgid "Short description"
+msgstr "Short description"
+
+msgid "Markdown syntax is supported"
+msgstr "Markdown syntax is supported"
+
+msgid "Long description"
+msgstr "Long description"
+
+# src/template_utils.rs:234
+msgid "Default article license"
+msgstr "Default article license"
+
+msgid "Save these settings"
+msgstr "Save these settings"
+
+msgid "About {0}"
+msgstr "About {0}"
+
+msgid "Runs Squs {0}"
+msgstr "Runs Squs {0}"
+
+msgid "Administred by {}"
+msgstr "Administred by {}"
+
+msgid ""
+"If you are browsing this site as a visitor, no data about you is collected."
+msgstr ""
+"If you are browsing this site as a visitor, no data about you is collected."
+
+msgid ""
+"As a registered user, you have to provide your username (which does not have "
+"to be your real name), your functional email address and a password, in "
+"order to be able to log in, write articles and comment. The content you "
+"submit is stored until you delete it."
+msgstr ""
+"As a registered user, you have to provide your username (which does not have "
+"to be your real name), your functional email address and a password, in "
+"order to be able to log in, write articles and comment. The content you "
+"submit is stored until you delete it."
+
+msgid ""
+"When you log in, we store two cookies, one to keep your session open, the "
+"second to prevent other people to act on your behalf. We don't store any "
+"other cookies."
+msgstr ""
+"When you log in, we store two cookies, one to keep your session open, the "
+"second to prevent other people to act on your behalf. We don't store any "
+"other cookies."
+
+msgid "Edit your account"
+msgstr "Edit your account"
+
+msgid "Your Profile"
+msgstr "Your Profile"
+
+# src/template_utils.rs:234
+msgid "Display name"
+msgstr "Display name"
+
+# src/template_utils.rs:234
+msgid "Email"
+msgstr "Email"
+
+msgid "Summary"
+msgstr "Summary"
+
+msgid "Update account"
+msgstr "Update account"
+
+msgid "Danger zone"
+msgstr "Danger zone"
+
+msgid "Be very careful, any action taken here can't be cancelled."
+msgstr "Be very careful, any action taken here can't be cancelled."
+
+msgid "Delete your account"
+msgstr "Delete your account"
+
+msgid "Sorry, but as an admin, you can't leave your own instance."
+msgstr "Sorry, but as an admin, you can't leave your own instance."
+
+msgid "Create your account"
+msgstr "Create your account"
+
+msgid "Create an account"
+msgstr "Create an account"
+
+# src/template_utils.rs:234
+msgid "Username"
+msgstr "Username"
+
+# src/template_utils.rs:234
+msgid "Password"
+msgstr "Password"
+
+# src/template_utils.rs:234
+msgid "Password confirmation"
+msgstr "Password confirmation"
+
+msgid ""
+"Apologies, but registrations are closed on this particular instance. You "
+"can, however, find a different one."
+msgstr ""
+"Apologies, but registrations are closed on this particular instance. You "
+"can, however, find a different one."
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Subscribers"
+msgstr "Subscribers"
+
+msgid "Latest articles"
+msgstr "Latest articles"
+
+msgid "Your articles will appear here, but you didn't published anything yet."
+msgstr ""
+
+msgid "How to display Squs comments on your website?"
+msgstr ""
+
+msgid ""
+"Copy this code snippet on your article pages, and it will load Squs comments."
+msgstr ""
+
+msgid ""
+"Squs is loading your comments… Please make sure you use a recent version of "
+"your web browser, and that JavaScript is enabled."
+msgstr ""
+
+msgid "Error while generating this script. Try to refresh the page."
+msgstr ""
+
+msgid "'Error while generating this script. Try to refresh the page.'"
+msgstr ""
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Edit your profile"
+msgstr "Edit your profile"
+
+msgid "{0}'s subscribers"
+msgstr "{0}'s subscribers"
+
+msgid "Respond"
+msgstr "Respond"
+
+msgid "Are you sure?"
+msgstr "Are you sure?"
+
+msgid "Delete this comment"
+msgstr "Delete this comment"
+
+msgid "What is Plume?"
+msgstr "What is Plume?"
+
+msgid "Plume is a decentralized blogging engine."
+msgstr "Plume is a decentralized blogging engine."
+
+msgid "Authors can manage multiple blogs, each as its own website."
+msgstr "Authors can manage multiple blogs, each as its own website."
+
+msgid ""
+"Articles are also visible on other Plume instances, and you can interact "
+"with them directly from other platforms like Mastodon."
+msgstr ""
+"Articles are also visible on other Plume instances, and you can interact "
+"with them directly from other platforms like Mastodon."
+
+msgid "Home to <em>{0}</em> people"
+msgstr "Home to <em>{0}</em> people"
+
+msgid "Who wrote <em>{0}</em> articles"
+msgstr "Who wrote <em>{0}</em> articles"
+
+msgid "Read the detailed rules"
+msgstr "Read the detailed rules"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Reset your password"
+msgstr "Reset your password"
+
+# src/template_utils.rs:234
+msgid "New password"
+msgstr "New password"
+
+# src/template_utils.rs:234
+msgid "Confirmation"
+msgstr "Confirmation"
+
+msgid "Update password"
+msgstr "Update password"
+
+msgid "This token has expired"
+msgstr "This token has expired"
+
+msgid "Please start the process again by clicking"
+msgstr "Please start the process again by clicking"
+
+msgid "here"
+msgstr "here"
+
+msgid "Check your inbox!"
+msgstr "Check your inbox!"
+
+msgid ""
+"We sent a mail to the address you gave us, with a link to reset your "
+"password."
+msgstr ""
+"We sent a mail to the address you gave us, with a link to reset your "
+"password."
+
+# src/template_utils.rs:234
+msgid "E-mail"
+msgstr "E-mail"
+
+msgid "Send password reset link"
+msgstr "Send password reset link"
+
+msgid "Log in"
+msgstr "Log in"
+
+# src/template_utils.rs:234
+msgid "Username, or email"
+msgstr "Username, or email"
+
+msgid "Invalid CSRF token"
+msgstr "Invalid CSRF token"
+
+msgid ""
+"Something is wrong with your CSRF token. Make sure cookies are enabled in "
+"you browser, and try reloading this page. If you continue to see this error "
+"message, please report it."
+msgstr ""
+"Something is wrong with your CSRF token. Make sure cookies are enabled in "
+"you browser, and try reloading this page. If you continue to see this error "
+"message, please report it."
+
+msgid "Page not found"
+msgstr "Page not found"
+
+msgid "We couldn't find this page."
+msgstr "We couldn't find this page."
+
+msgid "The link that led you here may be broken."
+msgstr "The link that led you here may be broken."
+
+msgid "The content you sent can't be processed."
+msgstr "The content you sent can't be processed."
+
+msgid "Maybe it was too long."
+msgstr "Maybe it was too long."
+
+msgid "You are not authorized."
+msgstr "You are not authorized."
+
+msgid "Internal server error"
+msgstr "Internal server error"
+
+msgid "Something broke on our side."
+msgstr "Something broke on our side."
+
+msgid "Sorry about that. If you think this is a bug, please report it."
+msgstr "Sorry about that. If you think this is a bug, please report it."
+
+msgid "Comment"
+msgstr "Comment"

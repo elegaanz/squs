@@ -16,7 +16,7 @@ use std::{
 use validator::{Validate, ValidationError, ValidationErrors};
 
 use mail::{build_mail, Mailer};
-use plume_models::{
+use squs_models::{
     password_reset_requests::*,
     users::{User, AUTH_COOKIE},
     Error, PlumeRocket, CONFIG,

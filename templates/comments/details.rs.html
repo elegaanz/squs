@@ -1,0 +1,14 @@
+@use squs_models::comments::*;
+@use templates::base;
+@use templates::partials::comment;
+@use template_utils::*;
+
+@(ctx: BaseContext, comments: Vec<CommentTree>)
+
+@:base(ctx, i18n!(ctx.1, "Comment"), {}, {}, {
+    <section>
+        @for comm in comments {
+            @:comment(ctx, &comm)
+        }
+    </section>
+})

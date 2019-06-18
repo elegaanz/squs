@@ -1,97 +1,64 @@
-use chrono::NaiveDateTime;
-use heck::{CamelCase, KebabCase};
 use rocket_contrib::json::Json;
 
 use crate::api::{authorization::*, Api};
-use plume_api::posts::*;
-use plume_common::{activity_pub::broadcast, utils::md_to_html};
-use plume_models::{
-    blogs::Blog, db_conn::DbConn, instance::Instance, medias::Media, mentions::*, post_authors::*,
-    posts::*, safe_string::SafeString, tags::*, users::User, Error, PlumeRocket,
+use squs_common::activity_pub::broadcast;
+use squs_models::{
+    db_conn::DbConn, instance::Instance,
+    posts::*, safe_string::SafeString, users::User, PlumeRocket,
 };
+use serde::{Serialize, Deserialize};
+use std::{thread, str::FromStr};
+
+#[derive(Clone, Default, Serialize, Deserialize)]
+pub struct NewPostData {
+    title: String,
+    url: String,
+    subtitle: Option<String>,
+    content: String,
+    license: Option<String>,
+}
+
+#[derive(Clone, Default, Serialize, Deserialize)]
+pub struct PostData {
+    id: i32,
+    title: String,
+    url: String,
+    subtitle: String,
+    content: String,
+    creation_date: String,
+    license: String,
+}
 
 #[get("/posts/<id>")]
-pub fn get(id: i32, auth: Option<Authorization<Read, Post>>, conn: DbConn) -> Api<PostData> {
-    let user = auth.and_then(|a| User::get(&conn, a.0.user_id).ok());
+pub fn get(id: i32, conn: DbConn) -> Api<PostData> {
     let post = Post::get(&conn, id)?;
 
-    if !post.published
-        && !user
-            .and_then(|u| post.is_author(&conn, u.id).ok())
-            .unwrap_or(false)
-    {
-        return Err(Error::Unauthorized.into());
-    }
-
     Ok(Json(PostData {
-        authors: post
-            .get_authors(&conn)?
-            .into_iter()
-            .map(|a| a.username)
-            .collect(),
         creation_date: post.creation_date.format("%Y-%m-%d").to_string(),
-        tags: Tag::for_post(&conn, post.id)?
-            .into_iter()
-            .map(|t| t.tag)
-            .collect(),
-
         id: post.id,
         title: post.title,
         subtitle: post.subtitle,
         content: post.content.to_string(),
-        source: Some(post.source),
-        blog_id: post.blog_id,
-        published: post.published,
         license: post.license,
-        cover_id: post.cover_id,
+        url: post.url,
     }))
 }
 
 #[get("/posts?<title>&<subtitle>&<content>")]
-pub fn list(
-    title: Option<String>,
-    subtitle: Option<String>,
-    content: Option<String>,
-    auth: Option<Authorization<Read, Post>>,
-    conn: DbConn,
-) -> Api<Vec<PostData>> {
-    let user = auth.and_then(|a| User::get(&conn, a.0.user_id).ok());
-    let user_id = user.map(|u| u.id);
-
+pub fn list(title: Option<String>, subtitle: Option<String>, content: Option<String>, conn: DbConn) -> Api<Vec<PostData>> {
     Ok(Json(
         Post::list_filtered(&conn, title, subtitle, content)?
             .into_iter()
-            .filter(|p| {
-                p.published
-                    || user_id
-                        .and_then(|u| p.is_author(&conn, u).ok())
-                        .unwrap_or(false)
-            })
-            .filter_map(|p| {
-                Some(PostData {
-                    authors: p
-                        .get_authors(&conn)
-                        .ok()?
-                        .into_iter()
-                        .map(|a| a.username)
-                        .collect(),
+            .map(|p| {
+                PostData {
                     creation_date: p.creation_date.format("%Y-%m-%d").to_string(),
-                    tags: Tag::for_post(&conn, p.id)
-                        .ok()?
-                        .into_iter()
-                        .map(|t| t.tag)
-                        .collect(),
-
                     id: p.id,
                     title: p.title,
                     subtitle: p.subtitle,
                     content: p.content.to_string(),
-                    source: Some(p.source),
-                    blog_id: p.blog_id,
-                    published: p.published,
                     license: p.license,
-                    cover_id: p.cover_id,
-                })
+                    url: p.url,
+                }
             })
             .collect(),
     ))
@@ -104,123 +71,39 @@ pub fn create(
     rockets: PlumeRocket,
 ) -> Api<PostData> {
     let conn = &*rockets.conn;
-    let search = &rockets.searcher;
     let worker = &rockets.worker;
 
     let author = User::get(conn, auth.0.user_id)?;
 
-    let slug = &payload.title.clone().to_kebab_case();
-    let date = payload.creation_date.clone().and_then(|d| {
-        NaiveDateTime::parse_from_str(format!("{} 00:00:00", d).as_ref(), "%Y-%m-%d %H:%M:%S").ok()
-    });
-
-    let domain = &Instance::get_local()?.public_domain;
-    let (content, mentions, hashtags) = md_to_html(
-        &payload.source,
-        Some(domain),
-        false,
-        Some(Media::get_media_processor(conn, vec![&author])),
-    );
-
-    let blog = payload.blog_id.or_else(|| {
-        let blogs = Blog::find_for_author(conn, &author).ok()?;
-        if blogs.len() == 1 {
-            Some(blogs[0].id)
-        } else {
-            None
-        }
-    })?;
-
-    if Post::find_by_slug(conn, slug, blog).is_ok() {
-        return Err(Error::InvalidValue.into());
-    }
-
     let post = Post::insert(
         conn,
         NewPost {
-            blog_id: blog,
-            slug: slug.to_string(),
+            author_id: author.id,
+            url: payload.url.clone(),
             title: payload.title.clone(),
-            content: SafeString::new(content.as_ref()),
-            published: payload.published.unwrap_or(true),
+            content: SafeString::new(&payload.content),
             license: payload.license.clone().unwrap_or_else(|| {
                 Instance::get_local()
                     .map(|i| i.default_license)
                     .unwrap_or_else(|_| String::from("CC-BY-SA"))
             }),
-            creation_date: date,
-            ap_url: String::new(),
+            ap_id: String::new(),
             subtitle: payload.subtitle.clone().unwrap_or_default(),
-            source: payload.source.clone(),
-            cover_id: payload.cover_id,
-        },
-        search,
-    )?;
-
-    PostAuthor::insert(
-        conn,
-        NewPostAuthor {
-            author_id: author.id,
-            post_id: post.id,
         },
     )?;
 
-    if let Some(ref tags) = payload.tags {
-        for tag in tags {
-            Tag::insert(
-                conn,
-                NewTag {
-                    tag: tag.to_string(),
-                    is_hashtag: false,
-                    post_id: post.id,
-                },
-            )?;
-        }
-    }
-    for hashtag in hashtags {
-        Tag::insert(
-            conn,
-            NewTag {
-                tag: hashtag.to_camel_case(),
-                is_hashtag: true,
-                post_id: post.id,
-            },
-        )?;
-    }
-
-    if post.published {
-        for m in mentions.into_iter() {
-            Mention::from_activity(
-                &*conn,
-                &Mention::build_activity(&rockets, &m)?,
-                post.id,
-                true,
-                true,
-            )?;
-        }
-
-        let act = post.create_activity(&*conn)?;
-        let dest = User::one_by_instance(&*conn)?;
-        worker.execute(move || broadcast(&author, act, dest));
-    }
+    let act = post.create_activity(&*conn)?;
+    let dest = User::one_by_instance(&*conn)?;
+    worker.execute(move || broadcast(&author, act, dest));
 
     Ok(Json(PostData {
-        authors: post.get_authors(conn)?.into_iter().map(|a| a.fqn).collect(),
         creation_date: post.creation_date.format("%Y-%m-%d").to_string(),
-        tags: Tag::for_post(conn, post.id)?
-            .into_iter()
-            .map(|t| t.tag)
-            .collect(),
-
         id: post.id,
         title: post.title,
         subtitle: post.subtitle,
         content: post.content.to_string(),
-        source: Some(post.source),
-        blog_id: post.blog_id,
-        published: post.published,
         license: post.license,
-        cover_id: post.cover_id,
+        url: post.url,
     }))
 }
 
@@ -228,9 +111,39 @@ pub fn create(
 pub fn delete(auth: Authorization<Write, Post>, rockets: PlumeRocket, id: i32) -> Api<()> {
     let author = User::get(&*rockets.conn, auth.0.user_id)?;
     if let Ok(post) = Post::get(&*rockets.conn, id) {
-        if post.is_author(&*rockets.conn, author.id).unwrap_or(false) {
-            post.delete(&*rockets.conn, &rockets.searcher)?;
+        if post.author_id == author.id {
+            post.delete(&*rockets.conn)?;
         }
     }
+    Ok(Json(()))
+}
+
+#[get("/posts/feed?<url>")]
+pub fn fetch_feed(url: String, conn: DbConn, auth: Authorization<Write, Post>) -> Api<()> {
+    thread::spawn(move || {
+        thread::sleep(std::time::Duration::from_millis(1000 * 60 * 2)); // wait two minutes to be sure the feed is up to date
+        let feed = &reqwest::get(&url).expect("can't fetch feed").text().expect("read text");
+        let feed = atom_syndication::Feed::from_str(&feed).expect("invalid feed");
+        let user = User::get(&*conn, auth.0.user_id).expect("can't find author");
+        for entry in feed.entries() {
+            let post = Post::insert(&*conn, NewPost {
+                url: entry.links().into_iter().find(|l| l.mime_type() == Some("text/html".into())).or_else(|| entry.links().into_iter().next()).expect("no url").href().into(),
+                author_id: user.id,
+                title: entry.title().into(),
+                content: SafeString::new(entry.content().and_then(|c| c.value()).unwrap_or_default()),
+                license: entry.rights().unwrap_or_default().into(),
+                ap_id: String::new(),
+                subtitle: entry.summary().unwrap_or_default().into(),
+            });
+            match post {
+                Ok(post) => {
+                    let act = post.create_activity(&*conn).expect("couldn't generate Create Article");
+                    let dest = User::one_by_instance(&*conn).expect("can't list dest");
+                    broadcast(&user, act, dest);
+                },
+                Err(e) => println!("post was not ok {:?}", e)
+            }
+        }
+    });
     Ok(Json(()))
 }

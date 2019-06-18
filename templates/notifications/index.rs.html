@@ -1,6 +1,6 @@
 @use templates::base;
 @use template_utils::*;
-@use plume_models::notifications::Notification;
+@use squs_models::notifications::Notification;
 
 @(ctx: BaseContext, notifications: Vec<Notification>, page: i32, n_pages: i32)
 
@@ -22,7 +22,7 @@
                         }
                     </h3>
                     @if let Some(post) = notification.get_post(ctx.0) {
-                        <p><a href="@post.url(ctx.0).unwrap_or_default()">@post.title</a></p>
+                        <p><a href="@post.url">@post.title</a></p>
                     }
                 </main>
                 <p><small>@notification.creation_date.format("%B %e, %H:%M")</small></p>

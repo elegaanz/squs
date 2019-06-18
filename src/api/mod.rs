@@ -6,8 +6,8 @@ use rocket::{
 use rocket_contrib::json::Json;
 use serde_json;
 
-use plume_common::utils::random_hex;
-use plume_models::{api_tokens::*, apps::App, users::User, Error, PlumeRocket};
+use squs_common::utils::random_hex;
+use squs_models::{api_tokens::*, apps::App, users::User, Error, PlumeRocket};
 
 type Api<T> = Result<Json<T>, ApiError>;
 
@@ -99,4 +99,5 @@ pub fn oauth(
 
 pub mod apps;
 pub mod authorization;
+pub mod comments;
 pub mod posts;

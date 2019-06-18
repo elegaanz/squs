@@ -1,4 +1,4 @@
-use plume_models::{self, api_tokens::ApiToken};
+use squs_models::{self, api_tokens::ApiToken};
 use rocket::{
     http::Status,
     request::{self, FromRequest, Request},
@@ -10,6 +10,7 @@ use std::marker::PhantomData;
 pub trait Action {
     fn to_str() -> &'static str;
 }
+#[allow(dead_code)]
 pub struct Read;
 impl Action for Read {
     fn to_str() -> &'static str {
@@ -27,7 +28,7 @@ impl Action for Write {
 pub trait Scope {
     fn to_str() -> &'static str;
 }
-impl Scope for plume_models::posts::Post {
+impl Scope for squs_models::posts::Post {
     fn to_str() -> &'static str {
         "posts"
     }
@@ -45,11 +46,12 @@ where
     fn from_request(request: &'a Request<'r>) -> request::Outcome<Authorization<A, S>, ()> {
         request
             .guard::<ApiToken>()
-            .map_failure(|_| (Status::Unauthorized, ()))
+            .map_failure(|_| { println!("token fail!!"); (Status::Unauthorized, ()) })
             .and_then(|token| {
                 if token.can(A::to_str(), S::to_str()) {
                     Outcome::Success(Authorization(token, PhantomData))
                 } else {
+                    println!("token cant write posts");
                     Outcome::Failure((Status::Unauthorized, ()))
                 }
             })

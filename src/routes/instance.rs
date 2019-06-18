@@ -8,9 +8,9 @@ use serde_json;
 use validator::{Validate, ValidationErrors};
 
 use inbox;
-use plume_common::activity_pub::{broadcast, inbox::FromId};
-use plume_models::{
-    admin::Admin, comments::Comment, db_conn::DbConn, headers::Headers, instance::*, posts::Post,
+use squs_common::activity_pub::broadcast;
+use squs_models::{
+    admin::Admin, db_conn::DbConn, headers::Headers, instance::*, posts::Post,
     safe_string::SafeString, users::User, Error, PlumeRocket, CONFIG,
 };
 use routes::{errors::ErrorPage, rocket_uri_macro_static_files, Page, RespondOrRedirect};
@@ -18,67 +18,18 @@ use template_utils::{IntoContext, Ructe};
 
 #[get("/")]
 pub fn index(rockets: PlumeRocket) -> Result<Ructe, ErrorPage> {
-    let conn = &*rockets.conn;
-    let inst = Instance::get_local()?;
-    let federated = Post::get_recents_page(conn, Page::default().limits())?;
-    let local = Post::get_instance_page(conn, inst.id, Page::default().limits())?;
-    let user_feed = rockets.user.clone().and_then(|user| {
-        let followed = user.get_followed(conn).ok()?;
-        let mut in_feed = followed.into_iter().map(|u| u.id).collect::<Vec<i32>>();
-        in_feed.push(user.id);
-        Post::user_feed_page(conn, in_feed, Page::default().limits()).ok()
-    });
-
-    Ok(render!(instance::index(
-        &rockets.to_context(),
-        inst,
-        User::count_local(conn)?,
-        Post::count_local(conn)?,
-        local,
-        federated,
-        user_feed
-    )))
-}
-
-#[get("/local?<page>")]
-pub fn local(page: Option<Page>, rockets: PlumeRocket) -> Result<Ructe, ErrorPage> {
-    let page = page.unwrap_or_default();
-    let instance = Instance::get_local()?;
-    let articles = Post::get_instance_page(&*rockets.conn, instance.id, page.limits())?;
-    Ok(render!(instance::local(
-        &rockets.to_context(),
-        instance,
-        articles,
-        page.0,
-        Page::total(Post::count_local(&*rockets.conn)? as i32)
-    )))
-}
-
-#[get("/feed?<page>")]
-pub fn feed(user: User, page: Option<Page>, rockets: PlumeRocket) -> Result<Ructe, ErrorPage> {
-    let page = page.unwrap_or_default();
-    let followed = user.get_followed(&*rockets.conn)?;
-    let mut in_feed = followed.into_iter().map(|u| u.id).collect::<Vec<i32>>();
-    in_feed.push(user.id);
-    let articles = Post::user_feed_page(&*rockets.conn, in_feed, page.limits())?;
-    Ok(render!(instance::feed(
-        &rockets.to_context(),
-        articles,
-        page.0,
-        Page::total(Post::count_local(&*rockets.conn)? as i32)
-    )))
-}
-
-#[get("/federated?<page>")]
-pub fn federated(page: Option<Page>, rockets: PlumeRocket) -> Result<Ructe, ErrorPage> {
-    let page = page.unwrap_or_default();
-    let articles = Post::get_recents_page(&*rockets.conn, page.limits())?;
-    Ok(render!(instance::federated(
-        &rockets.to_context(),
-        articles,
-        page.0,
-        Page::total(Post::count_local(&*rockets.conn)? as i32)
-    )))
+    if let Some(user) = rockets.user.clone() {
+        Ok(render!(users::details(
+            &rockets.to_context(),
+            user.clone(),
+            Post::get_recents_for_author(&rockets.conn, &user, 20)?
+        )))
+    } else {
+        Ok(render!(instance::index(
+            &rockets.to_context(),
+            Instance::get_local()?
+        )))
+    }
 }
 
 #[get("/admin")]
@@ -202,7 +153,7 @@ pub fn admin_users(
 #[post("/admin/users/<id>/ban")]
 pub fn ban(_admin: Admin, id: i32, rockets: PlumeRocket) -> Result<Flash<Redirect>, ErrorPage> {
     let u = User::get(&*rockets.conn, id)?;
-    u.delete(&*rockets.conn, &rockets.searcher)?;
+    u.delete(&*rockets.conn)?;
 
     if Instance::get_local()
         .map(|i| u.instance_id == i.id)
@@ -231,38 +182,8 @@ pub fn shared_inbox(
     inbox::handle_incoming(rockets, data, headers)
 }
 
-#[get("/remote_interact?<target>")]
-pub fn interact(rockets: PlumeRocket, user: Option<User>, target: String) -> Option<Redirect> {
-    if User::find_by_fqn(&rockets, &target).is_ok() {
-        return Some(Redirect::to(uri!(super::user::details: name = target)));
-    }
-
-    if let Ok(post) = Post::from_id(&rockets, &target, None) {
-        return Some(Redirect::to(
-            uri!(super::posts::details: blog = post.get_blog(&rockets.conn).expect("Can't retrieve blog").fqn, slug = &post.slug, responding_to = _),
-        ));
-    }
-
-    if let Ok(comment) = Comment::from_id(&rockets, &target, None) {
-        if comment.can_see(&rockets.conn, user.as_ref()) {
-            let post = comment
-                .get_post(&rockets.conn)
-                .expect("Can't retrieve post");
-            return Some(Redirect::to(uri!(
-                super::posts::details: blog = post
-                    .get_blog(&rockets.conn)
-                    .expect("Can't retrieve blog")
-                    .fqn,
-                slug = &post.slug,
-                responding_to = comment.id
-            )));
-        }
-    }
-    None
-}
-
 #[get("/nodeinfo/<version>")]
-pub fn nodeinfo(conn: DbConn, version: String) -> Result<Json<serde_json::Value>, ErrorPage> {
+pub fn nodeinfo(version: String) -> Result<Json<serde_json::Value>, ErrorPage> {
     if version != "2.0" && version != "2.1" {
         return Err(ErrorPage::from(Error::NotFound));
     }
@@ -280,13 +201,6 @@ pub fn nodeinfo(conn: DbConn, version: String) -> Result<Json<serde_json::Value>
             "outbound": []
         },
         "openRegistrations": local_inst.open_registrations,
-        "usage": {
-            "users": {
-                "total": User::count_local(&*conn)?
-            },
-            "localPosts": Post::count_local(&*conn)?,
-            "localComments": Comment::count_local(&*conn)?
-        },
         "metadata": {
             "nodeName": local_inst.name,
             "nodeDescription": local_inst.short_description
@@ -306,10 +220,7 @@ pub fn about(rockets: PlumeRocket) -> Result<Ructe, ErrorPage> {
     Ok(render!(instance::about(
         &rockets.to_context(),
         Instance::get_local()?,
-        Instance::get_local()?.main_admin(conn)?,
-        User::count_local(conn)?,
-        Post::count_local(conn)?,
-        Instance::count(conn)? - 1
+        Instance::get_local()?.main_admin(conn)?
     )))
 }
 

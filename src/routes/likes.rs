@@ -1,33 +1,29 @@
-use rocket::response::{Flash, Redirect};
-use rocket_i18n::I18n;
+use rocket::response::Redirect;
 
-use plume_common::activity_pub::broadcast;
-use plume_common::utils;
-use plume_models::{
-    blogs::Blog, inbox::inbox, likes, posts::Post, users::User, Error, PlumeRocket,
+use squs_common::activity_pub::broadcast;
+use squs_models::{
+    comments::Comment, inbox::inbox, likes, users::User, Error, PlumeRocket,
 };
 use routes::errors::ErrorPage;
 
-#[post("/~/<blog>/<slug>/like")]
+#[post("/c/<id>/like")]
 pub fn create(
-    blog: String,
-    slug: String,
+    id: i32,
     user: User,
     rockets: PlumeRocket,
 ) -> Result<Redirect, ErrorPage> {
     let conn = &*rockets.conn;
-    let b = Blog::find_by_fqn(&rockets, &blog)?;
-    let post = Post::find_by_slug(&*conn, &slug, b.id)?;
+    let comm = Comment::get(&*conn, id)?;
 
-    if !user.has_liked(&*conn, &post)? {
-        let like = likes::Like::insert(&*conn, likes::NewLike::new(&post, &user))?;
+    if !user.has_liked(&*conn, &comm)? {
+        let like = likes::Like::insert(&*conn, likes::NewLike::new(&comm, &user))?;
         like.notify(&*conn)?;
 
         let dest = User::one_by_instance(&*conn)?;
         let act = like.to_activity(&*conn)?;
         rockets.worker.execute(move || broadcast(&user, act, dest));
     } else {
-        let like = likes::Like::find_by_user_on_post(&*conn, user.id, post.id)?;
+        let like = likes::Like::find_by_user_on_comment(&*conn, user.id, comm.id)?;
         let delete_act = like.build_undo(&*conn)?;
         inbox(
             &rockets,
@@ -41,14 +37,6 @@ pub fn create(
     }
 
     Ok(Redirect::to(
-        uri!(super::posts::details: blog = blog, slug = slug, responding_to = _),
+        uri!(super::instance::index),
     ))
-}
-
-#[post("/~/<blog>/<slug>/like", rank = 2)]
-pub fn create_auth(blog: String, slug: String, i18n: I18n) -> Flash<Redirect> {
-    utils::requires_login(
-        &i18n!(i18n.catalog, "To like a post, you need to be logged in"),
-        uri!(create: blog = blog, slug = slug),
-    )
 }

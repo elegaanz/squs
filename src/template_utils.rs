@@ -1,4 +1,4 @@
-use plume_models::{notifications::*, users::User, Connection, PlumeRocket};
+use squs_models::{notifications::*, users::User, Connection, PlumeRocket};
 
 use rocket::http::hyper::header::{ETag, EntityTag};
 use rocket::http::{Method, Status};
@@ -123,7 +123,6 @@ impl Size {
 }
 
 pub fn avatar(
-    conn: &Connection,
     user: &User,
     size: Size,
     pad: bool,
@@ -138,7 +137,7 @@ pub fn avatar(
         <img class="hidden u-photo" src="{url}"/>"#,
         size = size.as_str(),
         padded = if pad { "padded" } else { "" },
-        url = user.avatar_url(conn),
+        url = user.avatar_url.clone().unwrap_or_default(),
         title = i18n!(catalog, "{0}'s avatar"; name),
     ))
 }
@@ -201,23 +200,6 @@ pub fn paginate_param(
     }
     res.push_str("</div>");
     Html(res)
-}
-
-pub fn encode_query_param(param: &str) -> String {
-    param
-        .chars()
-        .map(|c| match c {
-            '+' => Ok("%2B"),
-            ' ' => Err('+'),
-            c => Err(c),
-        })
-        .fold(String::new(), |mut s, r| {
-            match r {
-                Ok(r) => s.push_str(r),
-                Err(r) => s.push(r),
-            };
-            s
-        })
 }
 
 #[macro_export]

@@ -1,5 +1,5 @@
-@use plume_models::CONFIG;
-@use plume_models::instance::Instance;
+@use squs_models::CONFIG;
+@use squs_models::instance::Instance;
 @use template_utils::*;
 @use routes::*;
 @(ctx: BaseContext, title: String, head: Content, header: Content, content: Content)
@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>@title ⋅ @i18n!(ctx.1, "Plume")</title>
+        <title>@title ⋅ @i18n!(ctx.1, "Squs")</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="@uri!(plume_static_files: file = "css/main.css", _build_id = CACHE_NAME)" />
         <link rel="stylesheet" href="@uri!(plume_static_files: file = "css/feather.css", _build_id = CACHE_NAME)" />
@@ -25,22 +25,12 @@
             <div id="content">
                 <nav>
                     <a href="@uri!(instance::index)" class="title">
-                        <img src="@uri!(plume_static_files: file = CONFIG.logo.main.as_str(), _build_id = CACHE_NAME)">
-                        <p>@i18n!(ctx.1, "Plume")</p>
+                        <p>@i18n!(ctx.1, "Squs")</p>
                     </a>
-                    <hr/>
                     @:header()
                 </nav>
                 <nav>
                     @if ctx.2.is_some() {
-                        <a href="@uri!(search::search: _)">
-                            <i class="icon icon-search"></i>
-                            <span class="mobile-label">@i18n!(ctx.1, "Search")</span>
-                        </a>
-                        <a href="@uri!(user::dashboard)">
-                            <i class="icon icon-home" aria-label="@i18n!(ctx.1, "Dashboard")"></i>
-                            <span class="mobile-label">@i18n!(ctx.1, "Dashboard")</span>
-                        </a>
                         <a href="@uri!(notifications::notifications: page = _)">
                             <i class="icon icon-bell" aria-label="@i18n!(ctx.1, "Notifications")"></i>
                             <span class="mobile-label">@i18n!(ctx.1, "Notifications")</span>
@@ -49,15 +39,11 @@
                             <i class="icon icon-log-out" aria-label="@i18n!(ctx.1, "Log Out")"></i>
                             <span class="mobile-label">@i18n!(ctx.1, "Log Out")</span>
                         </a>
-                        <a href="@uri!(user::me)" title="@i18n!(ctx.1, "My account")">
-                            @avatar(ctx.0, &ctx.2.clone().unwrap(), Size::Small, false, &ctx.1)
+                        <a href="@uri!(instance::index)" title="@i18n!(ctx.1, "My account")">
+                            @avatar(&ctx.2.clone().unwrap(), Size::Small, false, &ctx.1)
                             <span class="mobile-label">@i18n!(ctx.1, "My account")</span>
                         </a>
                     } else {
-                        <a href="@uri!(search::search: _)">
-                            <i class="icon icon-search"></i>
-                            <span class="mobile-label">@i18n!(ctx.1, "Search")</span>
-                        </a>
                         <a href="@uri!(session::new: m = _)">
                             <i class="icon icon-log-in"></i>
                             <span class="mobile-label">@i18n!(ctx.1, "Log In")</span>
@@ -79,7 +65,6 @@
             @:content()
         </main>
         <footer>
-            <hr/>
             <div>
                 <h3>@Instance::get_local().map(|i| i.name).unwrap_or_default()</h3>
                 <a href="@uri!(instance::about)">@i18n!(ctx.1, "About this instance")</a>
@@ -89,10 +74,8 @@
                 }
             </div>
             <div>
-                <h3>@concat!("Plume ", env!("CARGO_PKG_VERSION"))</h3>
-                <a href="https://docs.joinplu.me">@i18n!(ctx.1, "Documentation")</a>
-                <a href="https://github.com/Plume-org/Plume">@i18n!(ctx.1, "Source code")</a>
-                <a href="https://riot.im/app/#/room/#plume:disroot.org">@i18n!(ctx.1, "Matrix room")</a>
+                <h3>@concat!("Squs ", env!("CARGO_PKG_VERSION"))</h3>
+                <a href="https://github.com/BaptisteGelez/squs">@i18n!(ctx.1, "Source code")</a>
             </div>
         </footer>
         <script src="@uri!(plume_static_files: file = "plume-front.js", _build_id = CACHE_NAME)"></script>

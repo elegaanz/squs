@@ -1,4 +1,4 @@
-@use plume_models::users::User;
+@use squs_models::users::User;
 @use templates::base;
 @use template_utils::*;
 @use routes::*;
@@ -17,9 +17,9 @@
     <div class="list">
         @for user in users {
             <div class="card flex compact">
-                @avatar(ctx.0, &user, Size::Small, false, ctx.1)
+                @avatar(&user, Size::Small, false, ctx.1)
                 <p class="grow">
-                    <a href="@uri!(user::details: name = &user.fqn)">@user.name()</a>
+                    <a href="@user.ap_id" target="_blank">@user.name()</a>
                     <small>@format!("@{}", user.username)</small>
                 </p>
                 @if !user.is_admin {

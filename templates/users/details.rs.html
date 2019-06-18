@@ -1,58 +1,57 @@
 @use templates::{base, partials::post_card, users::header};
 @use template_utils::*;
-@use plume_models::instance::Instance;
-@use plume_models::users::User;
-@use plume_models::posts::Post;
+@use squs_models::users::User;
+@use squs_models::posts::Post;
+@use squs_models::CONFIG;
 @use routes::*;
 
-@(ctx: BaseContext, user: User, follows: bool, is_remote: bool, remote_url: String, recents: Vec<Post>, reshares: Vec<Post>)
+@(ctx: BaseContext, user: User, recents: Vec<Post>)
 
-@:base(ctx, user.name(), {
-	<meta content="profile" property="og:type" />
-	<meta content="120" property="og:image:width" />
-	<meta content="120" property="og:image:height" />
-	<meta content="summary" property="twitter:card" />
-	<meta content="'@Instance::get_local().unwrap().name" property="og:site_name" />
-	<meta content="@user.ap_url" property="og:url" />
-	<meta content="@user.display_name" property="profile:username" />
-	<meta content="@user.display_name's Blog" property="og:title" />
-	<meta content="@user.summary_html" name="description">
-	<meta content="@user.summary_html" property="og:description" />
-	<meta content="@user.avatar_url(ctx.0)" property="og:image" />
-
-	<link href='@Instance::get_local().unwrap().compute_box("@", &user.fqn, "atom.xml")' rel='alternate' type='application/atom+xml'>
-	<link href='@user.ap_url' rel='alternate' type='application/activity+json'>
-}, {}, {
-    @:header(ctx, &user, follows, is_remote, remote_url)
+@:base(ctx, i18n!(ctx.1, "Home"), {}, {}, {
+    @:header(ctx, &user)
 
     @tabs(&[
-        (&uri!(user::details: name = &user.fqn).to_string(), i18n!(ctx.1, "Articles"), true),
-        (&uri!(user::followers: name = &user.fqn, page = _).to_string(), i18n!(ctx.1, "Subscribers"), false),
-        (&uri!(user::followed: name = &user.fqn, page = _).to_string(), i18n!(ctx.1, "Subscriptions"), false)
+        (&uri!(instance::index).to_string(), i18n!(ctx.1, "Home"), true),
+        (&uri!(user::followers: page = _).to_string(), i18n!(ctx.1, "Subscribers"), false),
     ])
 
     @if !recents.is_empty() {
-    <div class="h-feed">
-        <h2>
-            <span class="p-name">@i18n!(ctx.1, "Latest articles")</span>
-            <small><a href="@uri!(user::atom_feed: name = &user.fqn)" title="@i18n!(ctx.1, "Atom feed")">@icon!("rss")</a></small>
-        </h2>
-        <div class="cards">
-            @for article in recents {
-                @:post_card(ctx, article)
-            }
+        <div class="h-feed">
+            <h2>
+                <span class="p-name">@i18n!(ctx.1, "Latest articles")</span>
+            </h2>
+            <div class="cards">
+                @for article in recents {
+                    @:post_card(ctx, article)
+                }
+            </div>
         </div>
-    </div>
+    } else {
+        <p class="center">
+            @i18n!(ctx.1, "Your articles will appear here, but you didn't published anything yet.")
+        </p>
     }
 
-    @if !reshares.is_empty() {
-    <div class="h-feed">
-        <h2 class="p-name">@i18n!(ctx.1, "Recently boosted")</h2>
-        <div class="cards">
-            @for article in reshares {
-                @:post_card(ctx, article)
-            }
-        </div>
-    </div>
-    }
+    <h1>@i18n!(ctx.1, "How to display Squs comments on your website?")</h1>
+
+    <p>@i18n!(ctx.1, "Copy this code snippet on your article pages, and it will load Squs comments.")</p>
+    <pre><code>
+&lt;div id=&quot;squs&quot;&gt;
+    &lt;noscript&gt;
+        &lt;p class=&quot;error&quot;&gt;
+            @i18n!(ctx.1, "Squs is loading your comments… Please make sure you use a recent version of your web browser, and that JavaScript is enabled.")
+        &lt;/p&gt;
+    &lt;/noscript&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://@CONFIG.base_url/@uri!(plume_static_files: file = "squs.js", _build_id = CACHE_NAME)&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    new Squs('@CONFIG.base_url', '@user.get_token(ctx.0).unwrap_or_else(|_| i18n!(ctx.1, "Error while generating this script. Try to refresh the page."))');
+&lt;/script&gt;
+    </code></pre>
+
+    <p>Then, in the script you use to publish your blog (generally a CI system), run this command:</p>
+    <pre><code>
+curl -H "Authorization: Bearer @user.get_token(ctx.0).unwrap_or_else(|_| i18n!(ctx.1, "'Error while generating this script. Try to refresh the page.'"))" 'https://@CONFIG.base_url/api/v1/posts/feed?url=ATOM_FEED'
+    </pre></code>
+    <p>And replace <b>ATOM_FEED</b> by the URL of the Atom feed of your blog.</p>
 })

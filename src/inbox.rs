@@ -1,9 +1,9 @@
-use plume_common::activity_pub::{
+use squs_common::activity_pub::{
     inbox::FromId,
     request::Digest,
     sign::{verify_http_headers, Signable},
 };
-use plume_models::{
+use squs_models::{
     headers::Headers, inbox::inbox, instance::Instance, users::User, Error, PlumeRocket,
 };
 use rocket::{data::*, http::Status, response::status, Outcome::*, Request};

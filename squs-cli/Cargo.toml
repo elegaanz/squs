@@ -1,0 +1,24 @@
+[package]
+name = "squs-cli"
+version = "0.3.0"
+authors = ["Plume contributors and Ana Gelez"]
+
+[[bin]]
+name = "squs-cli"
+path = "src/main.rs"
+
+[dependencies]
+clap = "2.33"
+dotenv = "0.14"
+rpassword = "3.0"
+
+[dependencies.diesel]
+features = ["r2d2", "chrono"]
+version = "*"
+
+[dependencies.squs-models]
+path = "../squs-models"
+
+[features]
+postgres = ["squs-models/postgres", "diesel/postgres"]
+sqlite = ["squs-models/sqlite", "diesel/sqlite"]
