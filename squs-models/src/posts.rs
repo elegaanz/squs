@@ -5,7 +5,7 @@ use activitypub::{
     CustomObject,
 };
 use chrono::{NaiveDateTime, TimeZone, Utc};
-use diesel::{self, ExpressionMethods, QueryDsl, RunQueryDsl};
+use diesel::{self, ExpressionMethods, QueryDsl, RunQueryDsl, SaveChangesDsl};
 use serde_json;
 use std::collections::HashSet;
 
@@ -14,7 +14,7 @@ use squs_common::activity_pub::{Id, IntoId, Licensed, PUBLIC_VISIBILITY};
 use safe_string::SafeString;
 use schema::posts;
 use users::User;
-use {Connection, Error, Result};
+use {Connection, Error, Result, CONFIG};
 
 pub type LicensedArticle = CustomObject<Licensed, Article>;
 
@@ -48,7 +48,13 @@ impl Post {
     get!(posts);
     find_by!(posts, find_by_ap_id, ap_id as &str);
     find_by!(posts, find_by_url, url as &str);
-    insert!(posts, NewPost);
+    insert!(posts, NewPost, |new, conn| {
+        if new.ap_id.is_empty() {
+            new.ap_id = format!("https://{}/p/{}", CONFIG.base_url, new.id);
+            let _: Post = new.save_changes(conn)?;
+        }
+        Ok(new)
+    });
 
     pub fn update(&self, conn: &Connection) -> Result<Self> {
         diesel::update(self).set(self).execute(conn)?;
