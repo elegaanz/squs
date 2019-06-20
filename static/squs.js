@@ -35,7 +35,7 @@ const buildComment = (comm) => h('div', { className: 'comment' }, [
 
 class Squs {
 	constructor(baseUrl, token, id) {
-		document.head.appendChild(h('link', { href: `https://${baseUrl}/static/css/squs.css` }, []))
+		document.head.appendChild(h('link', { href: `https://${baseUrl}/static/css/squs.css`, rel: 'stylesheet' }, []))
 		fetch(`https://${baseUrl}/api/v1/comments?article=${encodeURIComponent(window.location)}`)
 			.then(r => r.json())
 			.then(r => {
