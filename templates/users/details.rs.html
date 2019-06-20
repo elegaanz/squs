@@ -43,7 +43,7 @@
         &lt;/p&gt;
     &lt;/noscript&gt;
 &lt;/div&gt;
-&lt;script src=&quot;https://@CONFIG.base_url/@uri!(plume_static_files: file = "squs.js", _build_id = CACHE_NAME)&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://@CONFIG.base_url/@uri!(static_files: file = "squs.js")&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
     new Squs('@CONFIG.base_url', '@user.get_token(ctx.0).unwrap_or_else(|_| i18n!(ctx.1, "Error while generating this script. Try to refresh the page."))');
 &lt;/script&gt;
@@ -51,7 +51,7 @@
 
     <p>Then, in the script you use to publish your blog (generally a CI system), run this command:</p>
     <pre><code>
-curl -H "Authorization: Bearer @user.get_token(ctx.0).unwrap_or_else(|_| i18n!(ctx.1, "'Error while generating this script. Try to refresh the page.'"))" 'https://@CONFIG.base_url/api/v1/posts/feed?url=ATOM_FEED'
+curl -H 'Authorization: Bearer @user.get_token(ctx.0).unwrap_or_else(|_| i18n!(ctx.1, "'Error while generating this script. Try to refresh the page.'"))' 'https://@CONFIG.base_url/api/v1/posts/feed?url=ATOM_FEED'
     </pre></code>
     <p>And replace <b>ATOM_FEED</b> by the URL of the Atom feed of your blog.</p>
 })
