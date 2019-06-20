@@ -39,7 +39,7 @@ pub fn for_article(article: String, conn: DbConn) -> Api<Vec<Comm>> {
 	let post = Post::find_by_slug(&conn, &slug)?;
 	let comments = Comment::list_by_post(&conn, post.id)?;
 	Ok(Json(comments.into_iter()
-		.filter_map(|c| Comm::from_comment(&*conn, c))
+		.filter_map(|c| if c.in_response_to_id.is_none() { Comm::from_comment(&*conn, c) } else { None })
 		.collect()
 	))
 }
