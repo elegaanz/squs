@@ -126,8 +126,15 @@ pub fn fetch_feed(url: String, conn: DbConn, auth: Authorization<Write, Post>) -
         let feed = atom_syndication::Feed::from_str(&feed).expect("invalid feed");
         let user = User::get(&*conn, auth.0.user_id).expect("can't find author");
         for entry in feed.entries() {
+            let u: String = entry.links()
+                .into_iter()
+                .find(|l| l.mime_type() == Some("text/html".into()))
+                .or_else(|| entry.links().into_iter().next())
+                .expect("no url")
+                .href().into();
+            dbg!(u.clone());
             let post = Post::insert(&*conn, NewPost {
-                url: entry.links().into_iter().find(|l| l.mime_type() == Some("text/html".into())).or_else(|| entry.links().into_iter().next()).expect("no url").href().into(),
+                url: u,
                 author_id: user.id,
                 title: entry.title().into(),
                 content: SafeString::new(entry.content().and_then(|c| c.value()).unwrap_or_default()),
