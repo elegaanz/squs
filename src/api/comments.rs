@@ -31,7 +31,12 @@ impl Comm {
 
 #[get("/comments?<article>")]
 pub fn for_article(article: String, conn: DbConn) -> Api<Vec<Comm>> {
-	let post = Post::find_by_url(&conn, &article)?;
+	let slug = article.replace("http://www.", "")
+	    .replace("https://www.", "")
+	    .replace("https://", "")
+	    .replace("http://", "")
+	    .replace("/", "");
+	let post = Post::find_by_slug(&conn, &slug)?;
 	let comments = Comment::list_by_post(&conn, post.id)?;
 	Ok(Json(comments.into_iter()
 		.filter_map(|c| Comm::from_comment(&*conn, c))

@@ -30,6 +30,7 @@ pub struct Post {
     pub creation_date: NaiveDateTime,
     pub ap_id: String,
     pub subtitle: String,
+    pub slug: String,
 }
 
 #[derive(Insertable)]
@@ -48,11 +49,21 @@ impl Post {
     get!(posts);
     find_by!(posts, find_by_ap_id, ap_id as &str);
     find_by!(posts, find_by_url, url as &str);
+    find_by!(posts, find_by_slug, slug as &str);
     insert!(posts, NewPost, |new, conn| {
         if new.ap_id.is_empty() {
             new.ap_id = format!("https://{}/p/{}", CONFIG.base_url, new.id);
-            let _: Post = new.save_changes(conn)?;
         }
+
+        if new.slug.is_empty() {
+            new.slug = new.url.replace("http://www.", "")
+                .replace("https://www.", "")
+                .replace("https://", "")
+                .replace("http://", "")
+                .replace("/", "")
+        }
+
+        let _: Post = new.save_changes(conn)?;
         Ok(new)
     });
 

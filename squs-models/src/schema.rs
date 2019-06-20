@@ -120,6 +120,7 @@ table! {
         creation_date -> Timestamp,
         ap_id -> Text,
         subtitle -> Text,
+        slug -> Varchar,
     }
 }
 

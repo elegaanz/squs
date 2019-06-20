@@ -18,6 +18,5 @@ tags.*
 search_index
 main.css
 *.wasm
-*.js
 .buildconfig
 __pycache__
