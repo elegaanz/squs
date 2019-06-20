@@ -43,7 +43,7 @@
         &lt;/p&gt;
     &lt;/noscript&gt;
 &lt;/div&gt;
-&lt;script src=&quot;https://@CONFIG.base_url/@uri!(static_files: file = "squs.js")&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://@CONFIG.base_url@uri!(static_files: file = "squs.js")&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
     new Squs('@CONFIG.base_url', '@user.get_token(ctx.0).unwrap_or_else(|_| i18n!(ctx.1, "Error while generating this script. Try to refresh the page."))');
 &lt;/script&gt;
