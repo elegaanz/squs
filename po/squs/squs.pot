@@ -60,15 +60,15 @@ msgstr ""
 msgid "{} has been banned."
 msgstr ""
 
-# src/routes/posts.rs:41
+# src/routes/posts.rs:47
 msgid "You are not allowed to delete this article."
 msgstr ""
 
-# src/routes/posts.rs:66
+# src/routes/posts.rs:72
 msgid "Your article has been deleted."
 msgstr ""
 
-# src/routes/posts.rs:71
+# src/routes/posts.rs:77
 msgid "It looks like the article you tried to delete doesn't exist. Maybe it is already gone?"
 msgstr ""
 

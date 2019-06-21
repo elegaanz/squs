@@ -125,6 +125,7 @@ Then try to restart Plume.
                 routes::instance::web_manifest,
                 routes::likes::create,
                 routes::notifications::notifications,
+                routes::posts::redir,
                 routes::posts::activity_details,
                 routes::posts::delete,
                 routes::reshares::create,

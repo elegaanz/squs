@@ -4,12 +4,18 @@ use std::time::Duration;
 
 use squs_common::activity_pub::{broadcast, ActivityStream, ApRequest};
 use squs_models::{
+    db_conn::DbConn,
     inbox::inbox,
     posts::*,
     users::User,
     Error, PlumeRocket,
 };
 use routes::errors::ErrorPage;
+
+#[get("/p/<id>")]
+pub fn redir(id: i32, conn: DbConn) -> Option<Redirect> {
+    Post::get(&*conn, id).ok().map(|p| Redirect::to(p.url))
+}
 
 #[get("/p/<id>", rank = 3)]
 pub fn activity_details(
