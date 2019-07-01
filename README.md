@@ -26,3 +26,168 @@ Here are the CSS classes that you can use to style the comments:
 - `author`: the author's name and @
 
 And if you want to style avatars, you can use the `.comment > header > img` selector.
+
+## Install your instance
+
+First of all, make sure you have a dedicated domain or subdomain for your instance.
+
+You'll need to install these packages first :
+
+- PosgtreSQL **or** SQLite (development files)
+- Gettext
+- Git
+- cURL
+- OpenSSL
+
+On Debian or Ubuntu you can use one of these commands:
+
+```bash
+# For postgres
+apt install postgresql postgresql-contrib libpq-dev gettext git curl gcc make openssl libssl-dev pkg-config
+# For sqlite
+apt install libsqlite3-dev gettext git curl gcc make openssl libssl-dev pkg-config
+```
+
+Then you need to install Rust (don't worry this script is safe):
+
+```bash
+curl https://sh.rustup.rs -sSf | sh
+```
+
+When asked, choose the *"1) Proceed with installation (default)"* option.
+
+Then run this command to be able to run cargo in the current session:
+
+```bash
+export PATH="$PATH:/home/plume/.cargo/bin:/home/plume/.local/bin:/usr/local/sbin"
+```
+
+To get and compile Squs source code, use:
+
+```bash
+git clone https://github.com/BaptisteGelez/squs.git
+cd squs
+```
+
+Then, you'll need to install Squs and the CLI tools to manage your instance.
+Run the following commands.
+
+```bash
+# Build the back-end, replacing DATABASE either with
+# postgres or sqlite depending on what you want to use
+cargo install --no-default-features --features DATABASE
+
+# Build plm, the CLI helper, replacing DATABASE again
+cargo install --no-default-features --features DATABASE --path squs-cli
+```
+
+If you are using PostgreSQL, you have to create a database for Squs.
+
+```
+service postgresql start
+su - postgres
+createuser -d -P squs
+createdb -O squs squs
+```
+
+Before starting Squs, you'll need to create a configuration file, called `.env`.
+Here is a sample of what you should put inside.
+
+```bash
+# The address of the database
+# (replace USER, PASSWORD, PORT and DATABASE_NAME with your values)
+#
+# If you are using SQlite, use the path of the database file (`squs.db` for instance)
+DATABASE_URL=postgres://USER:PASSWORD@IP:PORT/DATABASE_NAME
+
+# For PostgreSQL: migrations/postgres
+# For SQlite: migrations/sqlite
+MIGRATION_DIRECTORY=migrations/postgres
+
+# The domain on which your instance will be available
+BASE_URL=sq.us
+
+# Secret key used for private cookies and CSRF protection
+# You can generate one with `openssl rand -base64 32`
+ROCKET_SECRET_KEY=
+
+# Mail setting (only needed if you open registrations
+# and want the password-reset feature to work (as an admin you have
+# a CLI tool to reset your password))
+MAIL_SERVER=smtp.example.org
+MAIL_USER=example
+MAIL_PASSWORD=123456
+MAIL_HELO_NAME=example.org
+MAIL_ADDRESS=from@example.org
+```
+
+Now we need to run migrations. Migrations are scripts used to update
+the database. To run the migrations, you can do:
+
+```bash
+squs-cli migration run
+```
+
+Migrations should be run after each update. When in doubt, run them.
+
+After that, you'll need to setup your instance, and the admin's account.
+
+```
+squs-cli instance new
+squs users new --admin
+```
+
+---
+
+If you want to manage your Squs instance with systemd, you can use the following
+unit file (to be saved in `/etc/systemd/system/squs.service`):
+
+```ini
+[Unit]
+Description=squs
+
+[Service]
+Type=simple
+User=YOUR USER HERE
+WorkingDirectory=/home/YOUR USER HERE/squs
+ExecStart=/home/YOUR USER HERE/.cargo/bin/plume
+TimeoutSec=30
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Now you need to enable all of these services:
+
+```bash
+systemctl enable /etc/systemd/system/squs.service
+```
+
+Now start the services:
+
+```bash
+systemctl start squs
+```
+
+Check that they are properly running:
+
+```bash
+systemctl status squs
+```
+
+Finally, you'll have to configure your reverse-proxy to bind your domain to `localhost:7878`. Here is a Caddyfile:
+
+```
+DOMAIN_NAME {
+    proxy / localhost:7878 {
+        transparent
+    }
+}
+```
+
+(where `DOMAIN_NAME` is your actual domain name)
+
+---
+
+And you are normally done! :tada:
