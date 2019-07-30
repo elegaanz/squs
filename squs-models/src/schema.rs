@@ -1,17 +1,17 @@
 table! {
     api_tokens (id) {
-        id -> Int4,
+        id -> Integer,
         creation_date -> Timestamp,
         value -> Text,
         scopes -> Text,
-        app_id -> Int4,
-        user_id -> Int4,
+        app_id -> Integer,
+        user_id -> Integer,
     }
 }
 
 table! {
     apps (id) {
-        id -> Int4,
+        id -> Integer,
         name -> Text,
         client_id -> Text,
         client_secret -> Text,
@@ -22,14 +22,22 @@ table! {
 }
 
 table! {
+    comment_seers (id) {
+        id -> Integer,
+        comment_id -> Integer,
+        user_id -> Integer,
+    }
+}
+
+table! {
     comments (id) {
-        id -> Int4,
+        id -> Integer,
         content -> Text,
-        in_response_to_id -> Nullable<Int4>,
-        post_id -> Int4,
-        author_id -> Int4,
+        in_response_to_id -> Nullable<Integer>,
+        post_id -> Integer,
+        author_id -> Integer,
         creation_date -> Timestamp,
-        ap_id -> Varchar,
+        ap_id -> Text,
         sensitive -> Bool,
         spoiler_text -> Text,
         public_visibility -> Bool,
@@ -37,27 +45,19 @@ table! {
 }
 
 table! {
-    comment_seers (id) {
-        id -> Int4,
-        comment_id -> Int4,
-        user_id -> Int4,
-    }
-}
-
-table! {
     follows (id) {
-        id -> Int4,
-        follower_id -> Int4,
-        following_id -> Int4,
+        id -> Integer,
+        follower_id -> Integer,
+        following_id -> Integer,
         ap_id -> Text,
     }
 }
 
 table! {
     instances (id) {
-        id -> Int4,
-        public_domain -> Varchar,
-        name -> Varchar,
+        id -> Integer,
+        public_domain -> Text,
+        name -> Text,
         local -> Bool,
         blocked -> Bool,
         creation_date -> Timestamp,
@@ -65,94 +65,94 @@ table! {
         short_description -> Text,
         long_description -> Text,
         default_license -> Text,
-        long_description_html -> Varchar,
-        short_description_html -> Varchar,
+        long_description_html -> Text,
+        short_description_html -> Text,
     }
 }
 
 table! {
     likes (id) {
-        id -> Int4,
-        user_id -> Int4,
-        comment_id -> Int4,
+        id -> Integer,
+        user_id -> Integer,
+        comment_id -> Integer,
         creation_date -> Timestamp,
-        ap_id -> Varchar,
+        ap_id -> Text,
     }
 }
 
 table! {
     mentions (id) {
-        id -> Int4,
-        mentioned_id -> Int4,
-        post_id -> Nullable<Int4>,
-        comment_id -> Nullable<Int4>,
+        id -> Integer,
+        mentioned_id -> Integer,
+        post_id -> Nullable<Integer>,
+        comment_id -> Nullable<Integer>,
     }
 }
 
 table! {
     notifications (id) {
-        id -> Int4,
-        user_id -> Int4,
+        id -> Integer,
+        user_id -> Integer,
         creation_date -> Timestamp,
-        kind -> Varchar,
-        object_id -> Int4,
+        kind -> Text,
+        object_id -> Integer,
         read -> Bool,
     }
 }
 
 table! {
     password_reset_requests (id) {
-        id -> Int4,
-        email -> Varchar,
-        token -> Varchar,
+        id -> Integer,
+        email -> Text,
+        token -> Text,
         expiration_date -> Timestamp,
     }
 }
 
 table! {
     posts (id) {
-        id -> Int4,
-        url -> Varchar,
-        author_id -> Int4,
-        title -> Varchar,
+        id -> Integer,
+        url -> Text,
+        author_id -> Integer,
+        title -> Text,
         content -> Text,
-        license -> Varchar,
+        license -> Text,
         creation_date -> Timestamp,
         ap_id -> Text,
         subtitle -> Text,
-        slug -> Varchar,
+        slug -> Text,
     }
 }
 
 table! {
     reshares (id) {
-        id -> Int4,
-        user_id -> Int4,
-        comment_id -> Int4,
-        ap_id -> Varchar,
+        id -> Integer,
+        user_id -> Integer,
+        comment_id -> Integer,
+        ap_id -> Text,
         creation_date -> Timestamp,
     }
 }
 
 table! {
     users (id) {
-        id -> Int4,
-        username -> Varchar,
-        display_name -> Varchar,
-        outbox_url -> Varchar,
-        inbox_url -> Varchar,
+        id -> Integer,
+        username -> Text,
+        display_name -> Text,
+        outbox_url -> Text,
+        inbox_url -> Text,
         is_admin -> Bool,
         summary -> Text,
         email -> Nullable<Text>,
         hashed_password -> Nullable<Text>,
-        instance_id -> Int4,
+        instance_id -> Integer,
         creation_date -> Timestamp,
         ap_id -> Text,
         private_key -> Nullable<Text>,
         public_key -> Text,
-        shared_inbox_url -> Nullable<Varchar>,
-        followers_endpoint -> Varchar,
-        avatar_url -> Nullable<Varchar>,
+        shared_inbox_url -> Nullable<Text>,
+        followers_endpoint -> Text,
+        avatar_url -> Nullable<Text>,
         last_fetched_date -> Timestamp,
         fqn -> Text,
         summary_html -> Text,
@@ -179,8 +179,8 @@ joinable!(users -> instances (instance_id));
 allow_tables_to_appear_in_same_query!(
     api_tokens,
     apps,
-    comments,
     comment_seers,
+    comments,
     follows,
     instances,
     likes,
