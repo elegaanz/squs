@@ -59,7 +59,7 @@ When asked, choose the *"1) Proceed with installation (default)"* option.
 Then run this command to be able to run cargo in the current session:
 
 ```bash
-export PATH="$PATH:/home/plume/.cargo/bin:/home/plume/.local/bin:/usr/local/sbin"
+export PATH="$PATH:/home/$USER/.cargo/bin:/home/$USER/.local/bin:/usr/local/sbin"
 ```
 
 To get and compile Squs source code, use:
@@ -114,6 +114,8 @@ ROCKET_SECRET_KEY=
 # Mail setting (only needed if you open registrations
 # and want the password-reset feature to work (as an admin you have
 # a CLI tool to reset your password))
+# For more details see the Plume documentation (the variables are the same):
+# https://docs.joinplu.me/environment
 MAIL_SERVER=smtp.example.org
 MAIL_USER=example
 MAIL_PASSWORD=123456
@@ -150,7 +152,7 @@ Description=squs
 Type=simple
 User=YOUR USER HERE
 WorkingDirectory=/home/YOUR USER HERE/squs
-ExecStart=/home/YOUR USER HERE/.cargo/bin/plume
+ExecStart=/home/YOUR USER HERE/.cargo/bin/squs
 TimeoutSec=30
 Restart=always
 
@@ -158,19 +160,19 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Now you need to enable all of these services:
+Now you need to enable this service:
 
 ```bash
 systemctl enable /etc/systemd/system/squs.service
 ```
 
-Now start the services:
+Now start the service:
 
 ```bash
 systemctl start squs
 ```
 
-Check that they are properly running:
+Check that it is properly running:
 
 ```bash
 systemctl status squs
@@ -183,6 +185,8 @@ DOMAIN_NAME {
     proxy / localhost:7878 {
         transparent
     }
+
+    header / Access-Control-Allow-Origin "*"
 }
 ```
 
@@ -190,4 +194,9 @@ DOMAIN_NAME {
 
 ---
 
-And you are normally done! :tada:
+And you are normally done! :tada: All you need to do is to create an account on your instance,
+and follow the instructions.
+
+---
+
+Kudos to [Doshirae](https://home.doshi.re/) for testing Squs and helping with the documentation.
