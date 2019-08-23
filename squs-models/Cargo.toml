@@ -4,6 +4,7 @@ version = "0.3.0"
 authors = ["Plume contributors and Ana Gelez"]
 
 [dependencies]
+actix-web = "1.0"
 activitypub = "0.1.1"
 ammonia = "2.1.1"
 askama_escape = "0.1"
