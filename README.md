@@ -2,6 +2,8 @@
 
 A service to bring federated comments to static websites.
 
+**⚠️ Squs have not been updated in a long time, and may not work anymore. A better option if you want decentralized comments for your static site is [Cactus](https://cactus.chat/) which is based on Matrix.**
+
 Based on Plume (but a lot of the original source have been removed or adapted).
 
 When you build your static website, you have to run a command to tell Squs a new article was published.
